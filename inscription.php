@@ -12,52 +12,37 @@ $connexion = connectionBD();
             <h2 class="text-danger fw-bold">Inscription</h2>
             <p class="lead fst-italic">Vous désirez réserver une chambre dans notre hôtel ? Alors inscrivez-vous.</p>
         </div>
-
         <div class="row g-5 justify-content-center">
             <div class="col-md-7 col-lg-8">
                 <h4 class="mb-3">Information</h4>
-                <form class="needs-validation" novalidate>
+                <form  name="formulaire" method="post" action="models/process.php" >
                     <div class="row g-3">
-
                         <div class="col-sm-6">
-                            <label for="firstName" class="form-label">Prénom</label>
-                            <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Un prénom valide est requis.
-                            </div>
-
+                            <label for="surName" class="form-label">Prénom</label>
+                            <input type="text" class="form-control" id="surName" name="surname" required>
                         </div>
                         <div class="col-sm-6">
-                            <label for="lastName" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
-                            <div class="invalid-feedback">
-                                Un nom valide est requis.
-                            </div>
+                            <label for="Name" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="Name" name="name" required>
                         </div>
 
-                        <div class="col-12">
-                            <label for="password" class="form-label">Mot de passe</label>
-                            <input type="password" class="form-control" id="password" placeholder="contact@belle-nuit.be" aria-describedby="passwordHelpInline">
-                            <div class="invalid-feedback">
-                                Merci d'introduire un password
-                            </div>
-                            <div id="passwordHelpInline" class="form-text">Minimun de 8 caractères, maximum 20 caractères et un caractère spéciaux </div>
-                        </div>
+                        <!-- Email -->
                         <div class="col-12">
                             <label for="email" class="form-label">Adresse e-mail <span class="text-muted"> (Obligatoire)</span></label>
-                            <input type="email" class="form-control" id="email" placeholder="contact@belle-nuit.be">
-                            <div class="invalid-feedback">
-                                Merci d'introduire un mail valide.
-                            </div>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="contact@belle-nuit.be">
+                        </div>
+                        <div class="col-12">
+                            <label for="password" class="form-label">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="contact@belle-nuit.be" aria-describedby="passwordHelpInline">
+                            <div id="passwordHelpInline" class="form-text">Minimun de 8 caractères, maximum 20 caractères et un caractère spéciaux </div>
                         </div>
 
                         <div class="col-12">
-                            <label for="address" class="form-label">Adresse</label>
-                            <input type="text" class="form-control" id="address" placeholder="Rue de la paix" required>
-                            <div class="invalid-feedback">
-                                Merci d'introduire votre adresse.
-                            </div>
+                                <label for="address" class="form-label">Adresse</label>
+                                <input type="text" class="form-control" id="address" name="address"placeholder="Rue de la paix" required>
                         </div>
+
+
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Pays</label>
                             <select class="form-select" id="country" name="country" required>
@@ -71,27 +56,20 @@ $connexion = connectionBD();
                                     }
                                 ?>
                             </select>
-                            <div class="invalid-feedback">
-                                Choisir un pays
-                            </div>
                         </div>
-
+                        
                         <div class="col-sm-6">
-                            <label for="state" class="form-label">Ville</label>
-                            <input type="text" class="form-control" id="state" required>
-                            <div class="invalid-feedback">
-                                Merci de founir une ville de résidence!
-                            </div>
+                            <label for="city" class="form-label">Ville</label>
+                            <input type="text" class="form-control" id="city" name="city" required>
                         </div>
                     </div>
                     <hr class="my-4">
-                    <button class="w-100 btn btn-danger btn-lg" type="submit" name="inscription">Envoyer</button>
+                    <button class="w-100 btn btn-danger btn-lg" type="submit" name="btnRegistration">Envoyer</button>
                 </form>
             </div>
         </div>
     </main>
 </div>
 
-<script src="ressources/js/form-validation.js"></script>
 
 <?php require_once("gabarit/footer.php"); ?>

@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : ven. 27 mai 2022 à 18:56
--- Version du serveur : 5.7.36
--- Version de PHP : 7.4.26
+-- Hôte : localhost
+-- Généré le : ven. 27 mai 2022 à 23:52
+-- Version du serveur : 10.4.22-MariaDB
+-- Version de PHP : 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `hotel`
 --
+CREATE DATABASE IF NOT EXISTS `hotel` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `hotel`;
 
 -- --------------------------------------------------------
 
@@ -27,22 +29,17 @@ SET time_zone = "+00:00";
 -- Structure de la table `account`
 --
 
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE IF NOT EXISTS `account` (
-  `acc_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `account` (
+  `acc_id` int(11) NOT NULL,
   `acc_name` varchar(30) NOT NULL,
   `acc_surname` varchar(30) NOT NULL,
-  `acc_gender` varchar(1) NOT NULL,
-  `acc_adress` varchar(30) NOT NULL,
+  `acc_address` varchar(30) NOT NULL,
   `acc_city` varchar(20) NOT NULL,
-  `acc_id_pays` int(11) NOT NULL,
-  `acc_mail` varchar(30) NOT NULL,
+  `acc_id_country` int(11) NOT NULL,
+  `acc_email` varchar(30) NOT NULL,
   `acc_password` varchar(32) NOT NULL,
-  `acc_telephone` varchar(14) NOT NULL,
   `acc_admin` tinyint(4) NOT NULL,
-  `acc_active` tinyint(1) NOT NULL,
-  PRIMARY KEY (`acc_id`),
-  KEY `FK_Pays` (`acc_id_pays`)
+  `acc_active` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -51,17 +48,14 @@ CREATE TABLE IF NOT EXISTS `account` (
 -- Structure de la table `bedroom`
 --
 
-DROP TABLE IF EXISTS `bedroom`;
-CREATE TABLE IF NOT EXISTS `bedroom` (
-  `bedroom_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `bedroom` (
+  `bedroom_id` int(11) NOT NULL,
   `bedroom_description` text NOT NULL,
   `bedroom_bed` enum('double','twin','single') NOT NULL,
   `bedroom_people` int(11) NOT NULL,
   `bedroom_stock` int(11) NOT NULL,
   `bedroom_priceday` int(11) NOT NULL,
-  `id_roomcategory` int(11) NOT NULL,
-  PRIMARY KEY (`bedroom_id`),
-  KEY `FK_category_beedroom` (`id_roomcategory`)
+  `id_roomcategory` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -70,11 +64,9 @@ CREATE TABLE IF NOT EXISTS `bedroom` (
 -- Structure de la table `category_bedroom`
 --
 
-DROP TABLE IF EXISTS `category_bedroom`;
-CREATE TABLE IF NOT EXISTS `category_bedroom` (
-  `roomcategory_id` int(11) NOT NULL AUTO_INCREMENT,
-  `roomcategory_name` int(11) NOT NULL,
-  PRIMARY KEY (`roomcategory_id`)
+CREATE TABLE `category_bedroom` (
+  `roomcategory_id` int(11) NOT NULL,
+  `roomcategory_name` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -83,14 +75,12 @@ CREATE TABLE IF NOT EXISTS `category_bedroom` (
 -- Structure de la table `country`
 --
 
-DROP TABLE IF EXISTS `country`;
-CREATE TABLE IF NOT EXISTS `country` (
-  `country_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `country` (
+  `country_id` int(11) NOT NULL,
   `country_code` varchar(2) COLLATE utf8_bin DEFAULT NULL,
   `country_fr` varchar(100) COLLATE utf8_bin DEFAULT NULL,
-  `country_en` varchar(100) COLLATE utf8_bin NOT NULL,
-  PRIMARY KEY (`country_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=239 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+  `country_en` varchar(100) COLLATE utf8_bin NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Déchargement des données de la table `country`
@@ -341,12 +331,9 @@ INSERT INTO `country` (`country_id`, `country_code`, `country_fr`, `country_en`)
 -- Structure de la table `gallery`
 --
 
-DROP TABLE IF EXISTS `gallery`;
-CREATE TABLE IF NOT EXISTS `gallery` (
+CREATE TABLE `gallery` (
   `id_picture` int(11) NOT NULL,
-  `id_bedroom` int(11) NOT NULL,
-  KEY `FK_Picture_bedroom` (`id_bedroom`),
-  KEY `FK_Picture_id` (`id_picture`)
+  `id_bedroom` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -355,13 +342,11 @@ CREATE TABLE IF NOT EXISTS `gallery` (
 -- Structure de la table `picture`
 --
 
-DROP TABLE IF EXISTS `picture`;
-CREATE TABLE IF NOT EXISTS `picture` (
-  `picture_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `picture` (
+  `picture_id` int(11) NOT NULL,
   `picture_name` varchar(50) NOT NULL,
   `picture_url` varchar(100) NOT NULL,
-  `picture_description` text NOT NULL,
-  PRIMARY KEY (`picture_id`)
+  `picture_description` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -370,17 +355,104 @@ CREATE TABLE IF NOT EXISTS `picture` (
 -- Structure de la table `reservation`
 --
 
-DROP TABLE IF EXISTS `reservation`;
-CREATE TABLE IF NOT EXISTS `reservation` (
-  `reservation_id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `reservation` (
+  `reservation_id` int(11) NOT NULL,
   `id_bedroom` int(11) NOT NULL,
   `id_acc` int(11) NOT NULL,
   `reservation_date_start` date NOT NULL,
-  `reversation_date_end` date NOT NULL,
-  PRIMARY KEY (`reservation_id`),
-  KEY `FK_account_reservation` (`id_acc`),
-  KEY `FK_bedroom_reservation` (`id_bedroom`)
+  `reversation_date_end` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `account`
+--
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`acc_id`),
+  ADD KEY `FK_Pays` (`acc_id_country`);
+
+--
+-- Index pour la table `bedroom`
+--
+ALTER TABLE `bedroom`
+  ADD PRIMARY KEY (`bedroom_id`),
+  ADD KEY `FK_category_beedroom` (`id_roomcategory`);
+
+--
+-- Index pour la table `category_bedroom`
+--
+ALTER TABLE `category_bedroom`
+  ADD PRIMARY KEY (`roomcategory_id`);
+
+--
+-- Index pour la table `country`
+--
+ALTER TABLE `country`
+  ADD PRIMARY KEY (`country_id`);
+
+--
+-- Index pour la table `gallery`
+--
+ALTER TABLE `gallery`
+  ADD KEY `FK_Picture_bedroom` (`id_bedroom`),
+  ADD KEY `FK_Picture_id` (`id_picture`);
+
+--
+-- Index pour la table `picture`
+--
+ALTER TABLE `picture`
+  ADD PRIMARY KEY (`picture_id`);
+
+--
+-- Index pour la table `reservation`
+--
+ALTER TABLE `reservation`
+  ADD PRIMARY KEY (`reservation_id`),
+  ADD KEY `FK_account_reservation` (`id_acc`),
+  ADD KEY `FK_bedroom_reservation` (`id_bedroom`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `account`
+--
+ALTER TABLE `account`
+  MODIFY `acc_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT pour la table `bedroom`
+--
+ALTER TABLE `bedroom`
+  MODIFY `bedroom_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `category_bedroom`
+--
+ALTER TABLE `category_bedroom`
+  MODIFY `roomcategory_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `country`
+--
+ALTER TABLE `country`
+  MODIFY `country_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
+
+--
+-- AUTO_INCREMENT pour la table `picture`
+--
+ALTER TABLE `picture`
+  MODIFY `picture_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT pour la table `reservation`
+--
+ALTER TABLE `reservation`
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Contraintes pour les tables déchargées
@@ -390,7 +462,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 -- Contraintes pour la table `account`
 --
 ALTER TABLE `account`
-  ADD CONSTRAINT `FK_Pays` FOREIGN KEY (`acc_id_pays`) REFERENCES `country` (`country_id`);
+  ADD CONSTRAINT `FK_Pays` FOREIGN KEY (`acc_id_country`) REFERENCES `country` (`country_id`);
 
 --
 -- Contraintes pour la table `bedroom`

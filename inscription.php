@@ -1,7 +1,6 @@
 <?php
 require_once("gabarit/header.php");
-require_once("lib/php/pdo.php");
-include('lib/config/config.php');
+require_once("lib/php/fonctions.php");
 $connexion = connectionBD();
 ?>
 
@@ -33,7 +32,7 @@ $connexion = connectionBD();
                         </div>
                         <div class="col-12">
                             <label for="password" class="form-label">Mot de passe</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="contact@belle-nuit.be" aria-describedby="passwordHelpInline">
+                            <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpInline">
                             <div id="passwordHelpInline" class="form-text">Minimun de 8 caractères, maximum 20 caractères et un caractère spéciaux </div>
                         </div>
 
@@ -47,9 +46,7 @@ $connexion = connectionBD();
                             <label for="country" class="form-label">Pays</label>
                             <select class="form-select" id="country" name="country" required>
                                 <?php
-                                    $db = ConnectionBD();
-                                    $sql = "SELECT country_id, country_fr FROM country";
-                                    $results = $db->query( $sql );
+                                    $results = getCountryList();
                                     foreach($results as $country)		
                                     {
                                         echo '<option value="'.$country['country_id'].'"'.(($country['country_fr']==$COUNTRY)?' selected':'').'>'.$country['country_fr'].'</option>';
@@ -57,7 +54,6 @@ $connexion = connectionBD();
                                 ?>
                             </select>
                         </div>
-                        
                         <div class="col-sm-6">
                             <label for="city" class="form-label">Ville</label>
                             <input type="text" class="form-control" id="city" name="city" required>

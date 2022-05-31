@@ -7,6 +7,7 @@
     <title>Hotel Belle-Nuit</title>
     <link rel="stylesheet" href="ressources/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="ressources/css/main.css">
+    <link rel="stylesheet" href="ressources/css/signin.css">
 </head>
 <?php 	session_start(); ?>
 

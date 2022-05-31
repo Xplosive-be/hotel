@@ -1,6 +1,7 @@
 <?php 
     require_once("../lib/php/fonctions.php");
     require_once("../lib/php/pdo.php");
+    
     if( isset( $_POST['btnRegistration']) ) // Le visiteur viens du formulaire INSCRIPTION
         {
             $surname = htmlspecialchars($_POST['surname']);
@@ -14,7 +15,7 @@
             // Permet de crypter un mot de pass.
             $password = EncryptPassword($password);
             // Code généré pour permettre d'avoir un code unique pour valider son compte.
-            $codeactivation = 	hash('md2', 'Hello'. rand(5000, 10000) . 'Inscription');
+            $codeactivation = hash('md2', 'Hello'. rand(5000, 10000) . 'Inscription');
             $db = connectionBD();
 
             // Création de la requête sql
@@ -26,7 +27,7 @@
 
             if( $nbr > 0 )
             {
-                $msg = " $surname  $name, vous êtes inscrit.";	
+                header('Location: message.php?success=101');	
             }
             else
             {
@@ -34,3 +35,11 @@
                 header('refresh:3;url=../inscription.php');
             }
         }
+    if (isset( $_POST['btnConnection'])) {
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+        echo $email ." <br>" ;
+        echo $password . "<br>";
+        
+    }
+

@@ -5,7 +5,7 @@
                 <img class="logo-menu" src="ressources/images/logo-mini.png" alt="" srcset="">
             </a>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 fs-5">
-                <li><a href="#" class="nav-link px-6 link-danger">Home</a></li>
+                <li></li>
                 <li><a href="#" class="nav-link px-6 link-dark">Features</a></li>
                 <li><a href="#" class="nav-link px-6 link-dark">Pricing</a></li>
                 <li><a href="#" class="nav-link px-6 link-dark">FAQs</a></li>

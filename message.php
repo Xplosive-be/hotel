@@ -19,7 +19,12 @@ if( isset($_GET['error']) ) {
       $msg_error = "Erreur de la validation. Contactez un administrateur!";
       header('refresh:3;url=index.php');
     break;
+    case '704':
+      $msg_error = "Un de vos identifiants est érroné! ";
+      header('refresh:3;url=index.php');
+    break;
     }
+
     echo '
     <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -28,6 +33,7 @@ if( isset($_GET['error']) ) {
       </div>
     </div>
   </section>';
+
   } elseif (isset($_GET['success'])) {
 
     switch( $_GET['success'] )

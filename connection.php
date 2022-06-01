@@ -10,7 +10,7 @@ require_once("lib/php/fonctions.php");
     <h1 class="h3 mb-3 fw-normal">Bienvenu(e)</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" name="email"placeholder="contact@belle-nuit.be" required>
+      <input type="email" class="form-control" id="floatingInput" name="login"placeholder="contact@belle-nuit.be" required>
       <label for="floatingInput">Adresse mail</label>
     </div>
     <div class="form-floating">

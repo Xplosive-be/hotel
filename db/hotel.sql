@@ -46,16 +46,6 @@ CREATE TABLE IF NOT EXISTS `account` (
   KEY `FK_Pays` (`acc_id_country`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
---
--- Déchargement des données de la table `account`
---
-
-INSERT INTO `account` (`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_city`, `acc_id_country`, `acc_email`, `acc_password`, `acc_code_activation`, `acc_admin`, `acc_active`) VALUES
-(3, 'Smeyers', 'Samir', 'Rue du bourdon 74', 'Bruxelles', 25, 'Test@gmail.com', '532d1b1af5fc3d35075f46f47a18d01f039aee51652102c80f300dce805687aa24647e1a6feb04ee7dea68884f7624baf6cbc98a045c5349b154404044845ace', '6ba39c7e225187b1b0302da65f344a1e', 0, 1),
-(5, 'Smeyers', 'Samir', 'Rue du bourdon 74', 'Bruxelles', 25, 'Test@gmail.com', '183c0c68b49b06754da18b8b35daad1e149fbd919361c12bc8d7b10423e9a6a4b644410e030e1f86c22e31f9876b68dbac55814e66c3ab9c6cc32191710eb82e', '3420561ebe67a4e3f56f8e1569d6cb48', 0, 1),
-(6, 'Smeyers', 'Liliane', 'Rue du bourdon 74', 'Bruxelles', 25, 'Test@gmail.com', '532d1b1af5fc3d35075f46f47a18d01f039aee51652102c80f300dce805687aa24647e1a6feb04ee7dea68884f7624baf6cbc98a045c5349b154404044845ace', 'f6ac577bc04c6ec2546ffe7a21d6d56f', 0, 0);
-
--- --------------------------------------------------------
 
 --
 -- Structure de la table `bedroom`

@@ -12,7 +12,7 @@
                 <li><a href="#" class="nav-link px-6 link-dark">About</a></li>
             </ul>
             <div class="col-md-3 text-end">
-            <a href="connection.php"><button type="button" class="btn btn-outline-danger me-2">Connexion</button></a>
+                <button type="button" class="btn btn-outline-danger me-2">Connexion</button>
                 <a href="inscription.php"><button type="button" class="btn btn-danger">Inscription</button></a>
             </div>
         </header>

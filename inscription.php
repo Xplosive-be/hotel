@@ -35,10 +35,6 @@ $connexion = connectionBD();
                             <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpInline">
                             <div id="passwordHelpInline" class="form-text">Minimun de 8 caractères, maximum 20 caractères et un caractère spéciaux </div>
                         </div>
-                        <div class="col-12">
-                            <label for="password" class="form-label">Répéter mot de passe</label>
-                            <input type="password" class="form-control" id="password" name="password_two" aria-describedby="passwordHelpInline">
-                        </div>
 
                         <div class="col-12">
                                 <label for="address" class="form-label">Adresse</label>

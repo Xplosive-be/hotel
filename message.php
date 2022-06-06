@@ -23,14 +23,6 @@ if( isset($_GET['error']) ) {
       $msg_error = "Un de vos identifiants est érroné! ";
       header('refresh:3;url=index.php');
     break;
-    case '705':
-      $msg_error = "Votre adresse mail est déjà pris!";
-      header('refresh:3;url=inscription.php');
-    break;
-    case '706':
-      $msg_error = "Vos mots de passe ne sont pas identique!";
-      header('refresh:3;url=inscription.php');
-    break;
     }
 
     echo '

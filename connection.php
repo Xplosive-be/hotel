@@ -1,6 +1,5 @@
 <?php
 require_once("gabarit/header.php");
-require_once("lib/php/fonctions.php");
 ?>
 <div class="text-center body-signin ">
 

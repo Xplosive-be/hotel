@@ -33,8 +33,7 @@ $connexion = connectionBD();
                         </div>
                         <div class="col-12">
                             <label for="password" class="form-label">Mot de passe</label>
-                            <input type="password" class="form-control" id="password" name="password" aria-describedby="passwordHelpInline">
-                            <div id="passwordHelpInline" class="form-text">Minimun de 8 caractères, maximum 20 caractères et un caractère spéciaux </div>
+                            <input type="password" class="form-control" id="password" name="password">
                         </div>
                         <div class="col-12">
                             <label for="password" class="form-label">Répéter mot de passe</label>
@@ -42,11 +41,9 @@ $connexion = connectionBD();
                         </div>
 
                         <div class="col-12">
-                                <label for="address" class="form-label">Adresse</label>
-                                <input type="text" class="form-control" id="address" name="address"placeholder="Rue de la paix" required>
+                            <label for="address" class="form-label">Adresse</label>
+                            <input type="text" class="form-control" id="address" name="address"placeholder="Rue de la paix" required>
                         </div>
-
-
                         <div class="col-sm-6">
                             <label for="country" class="form-label">Pays</label>
                             <select class="form-select" id="country" name="country" required>

@@ -1,9 +1,9 @@
 <?php 
     require_once("../lib/php/fonctions.php");
     require_once("../lib/php/pdo.php");
+    session_start();
     
-    if( isset( $_POST['btnRegistration']) ) // Le visiteur viens du formulaire INSCRIPTION
-        {
+    if( isset( $_POST['btnRegistration'])){
             $surname = htmlspecialchars($_POST['surname']);
             $name = htmlspecialchars($_POST['name']);
             $email = htmlspecialchars($_POST['email']);
@@ -22,6 +22,7 @@
             $password = EncryptPassword($password);
             // Code généré pour permettre d'avoir un code unique pour valider son compte.
             $codeactivation = hash('md2', 'Hello'. rand(5000, 10000) . 'Inscription');
+
             $db = connectionBD();
             $Inscription = $db->prepare('SELECT count(*) as numberEmail From account WHERE acc_email = :mail');
             $Inscription->bindValue(':mail', $email, PDO::PARAM_STR);
@@ -33,15 +34,16 @@
                     header('Location: ../message.php?error=705');
                     exit();
                 }
-            }
+            
             //  Création de la requête sql
             // `account`(`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_city`, `acc_id_country`, `acc_email`, `acc_password`, `acc_code_activation`, `acc_admin`, `acc_active`)
                 $sql = "INSERT INTO account VALUES (null,'$name','$surname','$address','$city', '$country','$email','$password', '$codeactivation', 0,0)";
-                $nbr = $db->exec( $sql );
+                $db->exec( $sql );
                 // $msg_succes = "Votre compte a été crée.";
                 header('Location: ../message.php?success=101');
                 exit();
         }
+    }
         // PARTIE 
         // CONNECTION
     if (isset( $_POST['btnConnection'])) {
@@ -58,7 +60,8 @@
             if(!empty($data)) {
                 if ($password == $data["acc_password"]  && $data["acc_active"] != 0 ){
                     //Init variable pour des fonctions suivante
-                    $_SESSION['online'] = 1 ; 
+                    $_SESSION['online'] = 1; 
+                    $_SESSION['idAccount'] = $data["acc_id"];
                     $_SESSION['surname'] = $data["acc_surname"];
                     $_SESSION['name'] = $data["acc_name"];
                     $_SESSION['email'] = $data["acc_email"];
@@ -76,9 +79,32 @@
                 } else {
                     // $msg_error = "Un de vos identifiants est érroné! ";
                     header('Location: ../message.php?error=704');
+                    exit();
                 }
             } else {
                 // $msg_error = "Un de vos identifiants est érroné! ";
                 header('Location: ../message.php?error=704');
+                exit();
             }
+        }
+        // Back-end du formulaire de modification du profil.
+        if (isset( $_POST['btnEdit'])) {
+            // Verification et sécurisation des nouvelles données.
+            $surname = htmlspecialchars($_POST['surname']);
+            $name = htmlspecialchars($_POST['name']);
+            $address = htmlspecialchars($_POST['address']);
+            $country = htmlspecialchars($_POST['country']);
+            $city = htmlspecialchars($_POST['city']);
+            //SQL pour mettre à jour la DB
+            $db = connectionBD();
+            $sql ="UPDATE `account` SET `acc_name` = '". $name . "', `acc_surname` = '" . $surname . "', `acc_address` = '" . $address . "', `acc_city` = '" . $city . "', `acc_id_country` = '" . $country ."' WHERE `account`.`acc_id` = '". $_SESSION["idAccount"] . "'";
+            $db->exec( $sql );
+
+            //Update Session avec les nouvelles valeurs.
+            $_SESSION['surname'] = $surname;
+            $_SESSION['name'] = $name;
+            $_SESSION['address'] = $address;
+            $_SESSION['city'] = $city;
+            $_SESSION['country'] = $country;
+            header('Location: ../message.php?success=104');
         }

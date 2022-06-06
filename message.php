@@ -1,7 +1,6 @@
 <?php 
 require_once("gabarit/header.php");
 require_once("gabarit/menu.php"); 
-require_once("lib/php/fonctions.php");
 // Init message d'erreur 
 $msg_error = "";
 
@@ -62,6 +61,12 @@ if( isset($_GET['error']) ) {
       $msg_succes = "Bienvenu(e) " . $_SESSION['name'];
       header('refresh:3;url=index.php');
     break;
+    case '103':
+      $msg_succes = "Au revoir et à bientôt !";
+      header('refresh:3;url=index.php');
+    case '104':
+      $msg_succes = "Vos informations ont été modifiés avec succès.";
+      header('refresh:3;url=profil.php');
     }
     echo '
     <section class="py-5 text-center container">

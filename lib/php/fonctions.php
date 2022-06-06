@@ -1,14 +1,13 @@
 <?php
 require("pdo.php");
-session_start();
 
+// Fonction pour les créations de compte
 function EncryptPassword( $password )
 {
     $SALT = 'H@nk@4';
     $PEPPER = 'S@m!r';
 	return hash('sha512',$SALT.$password.$PEPPER);
 }
-
 function getCountryList(){
     $bdd = connectionBD();
     $stmt = $bdd->prepare('
@@ -33,7 +32,7 @@ function getAccountCodeActivation($idAccount) {
     return $InfoActivation;
 }
 
-function SetAccountActivation($idAccount) {
+function setAccountActivation($idAccount) {
     $bdd = connectionBD();
     $stmt = $bdd->prepare('
     UPDATE `account` 
@@ -44,5 +43,49 @@ function SetAccountActivation($idAccount) {
     $stmt->closeCursor();
 }
 
+// fonction pour le profil 
+function getProfil($idAccount){
+    $bdd = connectionBD();
+    $stmt = $bdd->prepare('
+    SELECT  *
+    FROM `account` 
+    WHERE `acc_id`=  :idAccount LIMIT 1');
+    $stmt->bindValue(":idAccount", $idAccount);
+    $stmt->execute();
+    $profil = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $profil;
+}
+
+// fonction pour les chambres 
+
+function getBedroomFromId ($idBedroom) {
+    $bdd = connectionBD();
+    $req = '
+    SELECT * 
+    FROM bedroom 
+    where bedroom_id = :idBedroom';
+    $stmt = $bdd->prepare($req);
+    $stmt->bindValue(":idBedroom",$idBedroom);
+    $stmt->execute();
+    $bedroom = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $bedroom;
+}
+
+function getImageBedroom($idBedroom){
+    $bdd = connectionBD();
+    $stmt = $bdd->prepare('
+    SELECT p.picture_id,picture_name,picture_url,picture_description
+    FROM picture p 
+    INNER JOIN gallery g on p.picture_id = g.id_picture
+    INNER JOIN bedroom b on b.bedroom_id = g.id_bedroom
+    WHERE b.bedroom_id = :idBedroom;');
+    $stmt->bindValue(":idBedroom", $idBedroom);
+    $stmt->execute();
+    $image = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $image;
+}
 
 

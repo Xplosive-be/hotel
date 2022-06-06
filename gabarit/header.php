@@ -1,3 +1,4 @@
+<?php session_start() ?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,3 +10,4 @@
     <link rel="stylesheet" href="ressources/css/main.css">
     <link rel="stylesheet" href="ressources/css/signin.css">
 </head>
+<body class="bg-light">

@@ -9,6 +9,3 @@
     <link rel="stylesheet" href="ressources/css/main.css">
     <link rel="stylesheet" href="ressources/css/signin.css">
 </head>
-<?php 	session_start(); ?>
-
-

@@ -1,6 +1,7 @@
 <?php 
 require_once("gabarit/header.php");
 require_once("gabarit/menu.php"); 
+require_once("lib/php/fonctions.php");
 // Init message d'erreur 
 $msg_error = "";
 
@@ -23,6 +24,17 @@ if( isset($_GET['error']) ) {
       $msg_error = "Un de vos identifiants est érroné! ";
       header('refresh:3;url=index.php');
     break;
+    case '705':
+      $msg_error = "Votre adresse mail est déjà pris!";
+      header('refresh:3;url=inscription.php');
+    break;
+    case '706':
+      $msg_error = "Vos mots de passe ne sont pas identique!";
+      header('refresh:3;url=inscription.php');
+    break;
+    case '707':
+      $msg_error ="Votre compte n'est pas activé, veuillez vérifier  votre boîte mail!";
+      header('refresh:3;url=index.php');
     }
 
     echo '
@@ -39,14 +51,17 @@ if( isset($_GET['error']) ) {
     switch( $_GET['success'] )
     {
     case '100':
-        $msg_succes = "Votre compte a été activé.";
-        header('refresh:3;url=index.php');
+      $msg_succes = "Votre compte a été activé.";
+      header('refresh:3;url=index.php');
     break;
     case '101':
       $msg_succes = "Votre compte a été crée.";
       header('refresh:3;url=index.php');
     break;
-
+    case '102':
+      $msg_succes = "Bienvenu(e) " . $_SESSION['name'];
+      header('refresh:3;url=index.php');
+    break;
     }
     echo '
     <section class="py-5 text-center container">

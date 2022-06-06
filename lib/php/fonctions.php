@@ -1,5 +1,6 @@
 <?php
 require("pdo.php");
+session_start();
 
 function EncryptPassword( $password )
 {

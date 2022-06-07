@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 31 mai 2022 à 12:11
+-- Généré le : mar. 07 juin 2022 à 08:47
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -44,8 +44,9 @@ CREATE TABLE IF NOT EXISTS `account` (
   `acc_active` tinyint(1) NOT NULL,
   PRIMARY KEY (`acc_id`),
   KEY `FK_Pays` (`acc_id_country`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 
 --
 -- Structure de la table `bedroom`
@@ -54,15 +55,25 @@ CREATE TABLE IF NOT EXISTS `account` (
 DROP TABLE IF EXISTS `bedroom`;
 CREATE TABLE IF NOT EXISTS `bedroom` (
   `bedroom_id` int(11) NOT NULL AUTO_INCREMENT,
+  `bedroom_name` varchar(30) NOT NULL,
   `bedroom_description` text NOT NULL,
   `bedroom_bed` enum('double','twin','single') NOT NULL,
   `bedroom_people` int(11) NOT NULL,
-  `bedroom_stock` int(11) NOT NULL,
   `bedroom_priceday` int(11) NOT NULL,
   `id_roomcategory` int(11) NOT NULL,
   PRIMARY KEY (`bedroom_id`),
   KEY `FK_category_beedroom` (`id_roomcategory`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `bedroom`
+--
+
+INSERT INTO `bedroom` (`bedroom_id`, `bedroom_name`, `bedroom_description`, `bedroom_bed`, `bedroom_people`, `bedroom_priceday`, `id_roomcategory`) VALUES
+(1, 'Chambre Standard', 'Cette chambre dispose d’une télévision à écran plat de 107 cm et d’une salle de bains en marbre avec douche et baignoire séparée. </br> \nCafé et thé équipements. </br>\nSuperficie 20 m² </br>\n\nDans votre salle de bains privative : </br>\n  \n  <ul> \n    <li>Articles de toilette gratuits </li> \n    <li>Peignoir</li> <li>Toilettes</li> \n    <li>Baignoire ou douche</li> <li>Serviettes</li> \n    <li>Chaussons</li> \n    <li>Sèche-cheveux</li> \n    <li>Papier toilette</li>\n    <strong>Vue :</strong> \n    <li>Vue sur la ville</li> \n    <li>Vue sur une cour intérieure</li> \n </ul>\n', 'double', 2, 120, 1),
+(2, 'Chambre Supérieure', 'Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\n\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\nSuperficie 30 m² </br>\nDans votre salle de bains privative :</br>\n\n<ul> \n    <li>Articles de toilette gratuits </li> \n    <li>Peignoir</li> <li>Toilettes</li> \n    <li>Baignoire ou douche</li> <li>Serviettes</li> \n    <li>Chaussons</li> \n    <li>Sèche-cheveux</li> \n    <li>Papier toilette</li>\n    <strong>Vue :</strong> \n    <li>Vue sur la ville</li> \n    <li>Vue sur une cour intérieure</li> \n </ul>', 'twin', 3, 240, 2),
+(3, 'Suite Deluxe', 'Les Suites Delux sont conçues sur deux niveaux : La chambre, avec un lit à baldaquin en bois frappant accompagné d’une chaise longue de détente, et salle de bains sont situés à l’étage supérieur.</br> Superficie 90 m² </br> Machine à expresso et thé. Le salon avec salle d’eau séparée au niveau inférieur, et chacun a sa propre entrée privée.</br>  <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>', 'double', 2, 1000, 3),
+(4, 'Suite Présidentielle', 'Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>', 'twin', 4, 3000, 4);
 
 -- --------------------------------------------------------
 
@@ -73,9 +84,19 @@ CREATE TABLE IF NOT EXISTS `bedroom` (
 DROP TABLE IF EXISTS `category_bedroom`;
 CREATE TABLE IF NOT EXISTS `category_bedroom` (
   `roomcategory_id` int(11) NOT NULL AUTO_INCREMENT,
-  `roomcategory_name` int(11) NOT NULL,
+  `roomcategory_name` varchar(30) NOT NULL,
   PRIMARY KEY (`roomcategory_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `category_bedroom`
+--
+
+INSERT INTO `category_bedroom` (`roomcategory_id`, `roomcategory_name`) VALUES
+(1, 'Chambre Standard'),
+(2, 'Chambre Supérieure'),
+(3, 'Suite Deluxe'),
+(4, 'Suite Présidentielle');
 
 -- --------------------------------------------------------
 
@@ -349,6 +370,31 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   KEY `FK_Picture_id` (`id_picture`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `gallery`
+--
+
+INSERT INTO `gallery` (`id_picture`, `id_bedroom`) VALUES
+(1, 1),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 2),
+(6, 2),
+(7, 2),
+(8, 2),
+(9, 2),
+(10, 3),
+(11, 3),
+(12, 3),
+(13, 3),
+(14, 3),
+(15, 4),
+(16, 4),
+(17, 4),
+(18, 4),
+(19, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -362,7 +408,32 @@ CREATE TABLE IF NOT EXISTS `picture` (
   `picture_url` varchar(100) NOT NULL,
   `picture_description` text NOT NULL,
   PRIMARY KEY (`picture_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `picture`
+--
+
+INSERT INTO `picture` (`picture_id`, `picture_name`, `picture_url`, `picture_description`) VALUES
+(1, 'Chambre Standard 1 ', 'ressources/images/chambres/standard/standard_1.jpg', 'Photo Chambre Standard'),
+(2, 'Chambre Standard 2', 'ressources/images/chambres/standard/standard_2.jpg', 'Photo Chambre Standard'),
+(3, 'Chambre Standard 3', 'ressources/images/chambres/standard/standard_3.jpg', 'Photo Chambre Standard'),
+(4, 'Chambre Standard 4', 'ressources/images/chambres/standard/standard_4.jpg', 'Photo Chambre Standard'),
+(5, 'Chambre Supérieure 1', 'ressources/images/chambres/superieure/superieure_1.jpg', 'Photo de la chambre Supérieure'),
+(6, 'Chambre Supérieure 2', 'ressources/images/chambres/superieure/superieure_2.jpg', 'Photo de la chambre Supérieure'),
+(7, 'Chambre Supérieure 3', 'ressources/images/chambres/superieure/superieure_3.jpg', 'Photo de la chambre Supérieure'),
+(8, 'Chambre Supérieure 4', 'ressources/images/chambres/superieure/superieure_4.jpg', 'Photo de la chambre Supérieure'),
+(9, 'Chambre Supérieure 5', 'ressources/images/chambres/superieure/superieure_5.jpg', 'Photo de la chambre Supérieure'),
+(10, 'Suite Deluxe 1 ', 'ressources/images/chambres/deluxe/deluxe_1.jpg', 'Photo de la Suite Deluxe.'),
+(11, 'Suite Deluxe 2', 'ressources/images/chambres/deluxe/deluxe_2.jpg', 'Photo de la Suite Deluxe.'),
+(12, 'Suite Deluxe 3', 'ressources/images/chambres/deluxe/deluxe_3.jpg', 'Photo de la Suite Deluxe.'),
+(13, 'Suite Deluxe 4', 'ressources/images/chambres/deluxe/deluxe_4.jpg', 'Photo de la Suite Deluxe.'),
+(14, 'Suite Deluxe 5', 'ressources/images/chambres/deluxe/deluxe_5.jpg', 'Photo de la Suite Deluxe.'),
+(15, 'Suite Présidentielle 1', 'ressources/images/chambres/presidentielle/presidentielle_1.jpg', 'Photo de la suite présidentielle'),
+(16, 'Suite Présidentielle 2', 'ressources/images/chambres/presidentielle/presidentielle_2.jpg', 'Photo de la suite présidentielle'),
+(17, 'Suite Présidentielle 3', 'ressources/images/chambres/presidentielle/presidentielle_3.jpg', 'Photo de la suite présidentielle'),
+(18, 'Suite Présidentielle 4', 'ressources/images/chambres/presidentielle/presidentielle_4.jpg', 'Photo de la suite présidentielle'),
+(19, 'Suite Présidentielle 5', 'ressources/images/chambres/presidentielle/presidentielle_5.jpg', 'Photo de la suite présidentielle');
 
 -- --------------------------------------------------------
 

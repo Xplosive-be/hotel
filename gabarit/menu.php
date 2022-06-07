@@ -5,7 +5,7 @@
             </a>
             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 fs-5">
                 <li></li>
-                <li><a href="#" class="nav-link px-6 link-dark">Features</a></li>
+                <li><a href="bedrooms.php" class="nav-link px-6 link-dark">Chambres</a></li>
                 <li><a href="#" class="nav-link px-6 link-dark">Pricing</a></li>
                 <li><a href="#" class="nav-link px-6 link-dark">FAQs</a></li>
                 <li><a href="#" class="nav-link px-6 link-dark">About</a></li>

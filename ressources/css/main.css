@@ -7,6 +7,13 @@ html {
     width: 120px;
 }
 
+#carouselExampleSlidesOnly .carousel-item img {
+  object-fit: contain;
+  object-position: center;
+  overflow: hidden;
+  height: 50vh;
+}
+
 
 /* Bootstrap css - Formulaire inscription */
 .bd-placeholder-img {
@@ -22,3 +29,4 @@ html {
       font-size: 3.5rem;
     }
   }
+

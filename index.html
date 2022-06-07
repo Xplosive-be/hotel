@@ -1,0 +1,53 @@
+<?php
+require_once("gabarit/header.php");
+require_once("gabarit/menu.php");
+require_once("lib/php/fonctions.php");
+//ressources/images/chambres/deluxe/deluxe_1.jp
+$bedrooms = getAllBedrooms();
+
+// var_dump($bedrooms);
+
+?>
+<h1 class='text-center my-3 text-danger fw-bolder'>Nos chambres</h1>
+
+<?php foreach ($bedrooms as $bedroom) : ?>
+    <main class="container bg-light p-5 border border-danger rounded mb-5">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-danger fst-italic fw-bolder "><?= $bedroom['bedroom_name'] ?></h2>
+                <p class="lead"><?= $bedroom['bedroom_description'] ?></p>
+            </div>
+            <div id="carouselExampleIndicators" class="carousel slide col-6 " data-bs-ride="true">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner ">
+                    <?php
+                    foreach ($bedrooms as $key => $bedroomImages) {
+                        $images = getImagesBedroom($bedroom['bedroom_id']);
+                        $bedroomsImages[$key]['image'] = $images;
+                    echo $bedroomsImages[$key]["image"][$key]["picture_url"] .' </br>';
+                    echo'
+                    <div class="carousel-item active">
+                        <img src="'.$bedroomsImages[$key]["image"][$key]["picture_url"].'" class="d-block w-100 active " alt="...">
+                    </div>';
+                    }
+                     ?>
+                </div>
+                        <button class="carousel-control-prev rounded" style="background-color: rgba(0, 0, 0, 0.02);" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" style="background-color: rgba(0, 0, 0, 0.02);" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+    </main>
+<?php endforeach; ?>
+
+
+<?php require_once("gabarit/footer.php"); ?>

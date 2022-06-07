@@ -59,13 +59,22 @@ function getProfil($idAccount){
 
 // fonction pour les chambres 
 
+function getAllBedrooms () {
+    $bdd = connectionBD();
+    $stmt = $bdd->prepare('
+    SELECT * 
+    FROM bedroom ');
+    $stmt->execute();
+    $bedrooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $bedrooms;
+}
 function getBedroomFromId ($idBedroom) {
     $bdd = connectionBD();
-    $req = '
+    $stmt = $bdd->prepare('
     SELECT * 
     FROM bedroom 
-    where bedroom_id = :idBedroom';
-    $stmt = $bdd->prepare($req);
+    where bedroom_id = :idBedroom');
     $stmt->bindValue(":idBedroom",$idBedroom);
     $stmt->execute();
     $bedroom = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -73,7 +82,7 @@ function getBedroomFromId ($idBedroom) {
     return $bedroom;
 }
 
-function getImageBedroom($idBedroom){
+function getImagesBedroom($idBedroom){
     $bdd = connectionBD();
     $stmt = $bdd->prepare('
     SELECT p.picture_id,picture_name,picture_url,picture_description
@@ -83,9 +92,10 @@ function getImageBedroom($idBedroom){
     WHERE b.bedroom_id = :idBedroom;');
     $stmt->bindValue(":idBedroom", $idBedroom);
     $stmt->execute();
-    $image = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
-    return $image;
+    return $images;
 }
+
 
 

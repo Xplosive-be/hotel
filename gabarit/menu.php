@@ -8,22 +8,30 @@
                 <li><a href="bedrooms.php" class="nav-link px-6 link-dark">Chambres</a></li>
                 <li><a href="#" class="nav-link px-6 link-dark">Pricing</a></li>
                 <li><a href="#" class="nav-link px-6 link-dark">FAQs</a></li>
-                <li><a href="#" class="nav-link px-6 link-dark">About</a></li>
+                <li><a href="contact.php" class="nav-link px-6 link-dark">Contact</a></li>
             </ul>
 
             <?php 
-            if(isset($_SESSION['name'])){
-               echo '
-               <div class="col-md-3 text-end"><a href="profil.php"><button type="button" class="btn btn-warning text-dark">' . $_SESSION["surname"] . ' ' . $_SESSION["name"] .'</button></a>
-               <a href="deconnection.php"><button type="button" class="btn btn-outline-danger me-2">Déconnexion</button></a> 
-               </div>';
-            } else {
+            if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
+                echo '
+                <div class="col-md-3 text-end text-nowrap">
+                 <a href="profil.php"><button type="button" class="btn btn-warning text-dark">' . $_SESSION["surname"] . ' ' . $_SESSION["name"] .'</button></a>
+                 <a href="admin.php"><button type="button" class="btn btn-primary text-white"><i class="fa-solid fa-screwdriver-wrench"></i> Admin</button></a>
+                 <a href="deconnection.php"><button type="button" class="btn btn-outline-danger me-2"><i class="fa-solid fa-xmark"></i> Déconnexion</button></a> 
+                </div>';
+             } elseif(isset($_SESSION['admin'])){
+                echo '
+                <div class="col-md-3 text-end">
+                    <a href="profil.php"><button type="button" class="btn btn-warning text-dark">' . $_SESSION["surname"] . ' ' . $_SESSION["name"] .'</button></a>
+                    <a href="deconnection.php"><button type="button" class="btn btn-outline-danger me-2">Déconnexion</button></a> 
+                </div>';
+            }  else {
                 echo '
                 <div class="col-md-3 text-end">
                 <a href="connection.php"><button type="button" class="btn btn-outline-danger me-2">Connexion</button></a>
                     <a href="inscription.php"><button type="button" class="btn btn-danger">Inscription</button></a>
                 </div>';
-            } 
+            }
             ?>
         </header>
     </div>

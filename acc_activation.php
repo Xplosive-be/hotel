@@ -18,7 +18,6 @@ if(isset($_GET['id']) && isset($_GET['codeActivation'])){
   } else {
     header('Location: message.php?error=703');
   }
-  
   // Condition si n'est pas active et que le code reçu en get est égal au code présent dans la db pour l'id présent dans le Get
   if ($codeActivation == $codeDbActivation && $InfoActivation['acc_active'] == '0') {
     // Changement de status pour l'activation 

@@ -68,7 +68,7 @@
                     $_SESSION['address'] = $data["acc_address"];
                     $_SESSION['city'] = $data["acc_city"];
                     $_SESSION['country'] = $data["acc_id_country"];
-                    $_SESSION['levelAccess'] = $data["acc_admin"];
+                    $_SESSION['admin'] = $data["acc_admin"];
                     //  $msg_succes = "Bienvenu(e) " . $_SESSION['name'];
                     header('Location: ../message.php?success=102');
                     exit();
@@ -99,12 +99,25 @@
             $db = connectionBD();
             $sql ="UPDATE `account` SET `acc_name` = '". $name . "', `acc_surname` = '" . $surname . "', `acc_address` = '" . $address . "', `acc_city` = '" . $city . "', `acc_id_country` = '" . $country ."' WHERE `account`.`acc_id` = '". $_SESSION["idAccount"] . "'";
             $db->exec( $sql );
-
             //Update Session avec les nouvelles valeurs.
             $_SESSION['surname'] = $surname;
             $_SESSION['name'] = $name;
             $_SESSION['address'] = $address;
             $_SESSION['city'] = $city;
             $_SESSION['country'] = $country;
+            // $msg_succes = "Vos informations ont été modifiés avec succès.";
             header('Location: ../message.php?success=104');
+        }
+        // Gestion de l'envoi du mail de contact
+        if (isset( $_POST['btnContact'])) {
+            $name = htmlspecialchars($_POST['name']);
+            $email = htmlspecialchars($_POST['email']);
+            $message = htmlspecialchars($_POST['message']);
+            $subject = htmlspecialchars($_POST['subject']);
+            $content="De la part : $name \n Email: $email \n Message: $message";
+            $recipient = "contact@belle-nuit.be";
+            $mailheader = "de: $email \r\n";
+            // mail($recipient, $subject, $content, $mailheader) or die("Erreur!");
+            // $msg_succes = "Votre message a été envoyé, nous y répondrons dans un délais de 24 h ouvrables.";
+            header('Location: ../message.php?success=105');
         }

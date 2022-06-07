@@ -12,10 +12,15 @@ if(isset($_GET['id']) && isset($_GET['codeActivation'])){
   // Init du tableau dans une variable
   $InfoActivation = getAccountCodeActivation($idAccount);
   // Init des variables via le tableau $InfoActivation
-  $codeDbActivation = $InfoActivation['acc_code_activation'];
-  $getActive = $InfoActivation['acc_active'];
+  if (!empty($InfoActivation['acc_code_activation'])){
+      $codeDbActivation = $InfoActivation['acc_code_activation'];
+      $InfoActivation['acc_active'];
+  } else {
+    header('Location: message.php?error=703');
+  }
+  
   // Condition si n'est pas active et que le code reçu en get est égal au code présent dans la db pour l'id présent dans le Get
-  if ($codeActivation == $codeDbActivation && $getActive == '0') {
+  if ($codeActivation == $codeDbActivation && $InfoActivation['acc_active'] == '0') {
     // Changement de status pour l'activation 
       setAccountActivation($idAccount);
       // redirection vers le $msg_succes = "Votre compte a été activé.";
@@ -29,9 +34,10 @@ if(isset($_GET['id']) && isset($_GET['codeActivation'])){
       // redirection vers le $msg_error =  "Erreur de la validation. Contactez un administrateur!"
       header('Location: message.php?error=703');
     }
-} else {
-  // Si l'utilsateur arrive sur la page avec autres choses chose que les 2 get.
-  // redirection vers le $msg_error = "Accès Interdit"
-  header('Location: message.php?error=403');
-  }
+    } 
+    else {
+      // Si l'utilsateur arrive sur la page avec autres choses chose que les 2 get.
+      // redirection vers le $msg_error = "Accès Interdit"
+      header('Location: message.php?error=403');
+      }
 ?>

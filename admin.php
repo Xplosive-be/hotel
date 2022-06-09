@@ -15,7 +15,7 @@ Admin();
                 </div>
             </div>
             <div class="col-md-auto">
-                <div class="p-5 bg-light  border border-danger border-5" style="height: 370px;">
+                <div class="p-5 bg-light  border border-danger border-5 rounded-3" style="height: 370px;">
                     <img src="ressources/icones/bed.png" alt="Icons Bed"></br>
                     <a class="btn btn btn-secondary mt-2 " href="#">Voir les réservations</a>
                 </div>

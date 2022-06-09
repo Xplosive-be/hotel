@@ -15,6 +15,7 @@ $profils = getProfils();
             <th>Nom</th>
             <th>Email</th>
             <th>Status</th>
+            <th>Admin</th>
             <th>Actions</th>
         </tr>
     </thead>
@@ -34,11 +35,10 @@ $profils = getProfils();
                         <td>
                             <p class="fst-italic mb-1">' . $profil["acc_email"] . '</p>
                         </td>
-                        <td>
                 ';
-                 echo ($profil['acc_active'] == 1) ? '<span class="badge bg-success rounded-pill d-inline">Active</span>' : '<span class="badge bg-danger rounded-pill d-inline">Inactive</span>';
+                 echo ($profil['acc_active'] == 1) ? '<td><span class="badge bg-success rounded-pill d-inline">Active</span></td>' : '<td><span class="badge bg-danger rounded-pill d-inline">Inactive</span></td>';
+                 echo ($profil['acc_admin'] == 1) ? '<td><span class="badge bg-success rounded-pill d-inline">Active</span></td>' : '<td><span class="badge bg-danger rounded-pill d-inline">Inactive</span></td>';
                 echo '   
-                    </td>
                     <td>
                         <a href="admin_profil.php?Id=' . $profil['acc_id'] . '" class="text-warning">
                             <i class="fa-solid fa-wrench fa-xl"></i>

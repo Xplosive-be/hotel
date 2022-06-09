@@ -73,6 +73,10 @@ if( isset($_GET['error']) ) {
       $msg_succes = "Votre message a été envoyé, nous y répondrons dans un délais de 24 h ouvrables.";
       header('refresh:3;url=index.php');
     break;
+    case '106':
+      $msg_succes = "Admin --- Vos informations ont été modifiés avec succès.";
+      header('refresh:3;url=index.php');
+    break;
     }
     echo '
     <section class="py-5 text-center container">

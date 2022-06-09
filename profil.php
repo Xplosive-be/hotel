@@ -46,7 +46,7 @@ $profil = getProfil($_SESSION['idAccount']);
                             <label for="city" class="form-label">Ville</label>
                             <input type="text" class="form-control" id="city" value="<?php echo $profil['acc_city'] ?>" name="city" required>
                         </div>
-                        <button class=" mt-3 btn btn-danger mx-auto mb-4 fw-bolder" style="width:auto;" type=submit" name="btnEdit">Modifier</button>
+                        </div class="text-center"><button class=" mt-3 btn btn-danger mx-auto mb-4 fw-bolder text-center" type=submit" name="btnEdit">Modifier</button></div>
                     </form>
                 </main>
             </div>

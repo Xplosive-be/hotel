@@ -8,6 +8,12 @@ function EncryptPassword( $password )
     $PEPPER = 'S@m!r';
 	return hash('sha512',$SALT.$password.$PEPPER);
 }
+
+function Admin(){
+    if(!isset($_SESSION) || $_SESSION['admin'] != 1 ) {
+        header('Location: message.php?error=403');
+    }
+}
 function getCountryList(){
     $bdd = connectionBD();
     $stmt = $bdd->prepare('
@@ -43,7 +49,7 @@ function setAccountActivation($idAccount) {
     $stmt->closeCursor();
 }
 
-// fonction pour le profil 
+// fonction pour le profil via ID
 function getProfil($idAccount){
     $bdd = connectionBD();
     $stmt = $bdd->prepare('
@@ -53,6 +59,17 @@ function getProfil($idAccount){
     $stmt->bindValue(":idAccount", $idAccount);
     $stmt->execute();
     $profil = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $profil;
+}
+
+function getProfils(){
+    $bdd = connectionBD();
+    $stmt = $bdd->prepare('
+    SELECT  *
+    FROM `account`');
+    $stmt->execute();
+    $profil = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $profil;
 }

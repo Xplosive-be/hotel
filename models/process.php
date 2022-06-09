@@ -121,3 +121,30 @@
             // $msg_succes = "Votre message a été envoyé, nous y répondrons dans un délais de 24 h ouvrables.";
             header('Location: ../message.php?success=105');
         }
+        if (isset( $_POST['btnEditAdmin'])) {
+            // Verification et sécurisation des nouvelles données.
+            $surname = htmlspecialchars($_POST['surname']);
+            $name = htmlspecialchars($_POST['name']);
+            $address = htmlspecialchars($_POST['address']);
+            $country = htmlspecialchars($_POST['country']);
+            $city = htmlspecialchars($_POST['city']);
+            $active = htmlspecialchars($_POST['active']);
+            $admin = htmlspecialchars($_POST['admin']);
+            //SQL pour mettre à jour la DB
+            $db = connectionBD();
+            var_dump($_POST['admin']);
+            if(empty($_POST['admin'])){
+                $admin = 0;
+            }
+            
+            if(empty($_POST['active'])){
+                $active = 0;
+            }
+            echo $active;
+            echo $admin;
+            $sql ="UPDATE `account` SET `acc_name` = '". $name . "', `acc_surname` = '" . $surname . "', `acc_address` = '" . $address . "', `acc_city` = '" . $city . "', `acc_id_country` = '" . $country ."' , `acc_admin` = '" . $admin ." ,  , `acc_active` = '" . $active ."  WHERE `account`.`acc_id` = '". $_SESSION['idProfilEdit'] . "'";
+
+            $db->exec( $sql );
+            // $msg_succes = "Vos informations ont été modifiés avec succès.";
+            header('Location: ../message.php?success=106');
+        }

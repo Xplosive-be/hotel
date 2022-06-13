@@ -130,9 +130,6 @@
             $city = htmlspecialchars($_POST['city']);
             //SQL pour mettre à jour la DB
             $db = connectionBD();
-            // if(empty($_POST['admin'])){
-                //     $admin = 0;
-                // }
                 if(!isset($_POST['admin'])){
                     $admin = 0;
                 } else {

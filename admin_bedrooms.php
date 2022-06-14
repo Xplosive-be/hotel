@@ -14,9 +14,9 @@ $bedrooms = getAllBedrooms();
         <tr>
             <th>ID</th>
             <th>Nom</th>
+            <th>Type de chambre</th>
             <th>Description</th>
             <th>Type de chambre</th>
-            <th>Nombres</th>
             <th>€ / nuit</th>
             <th>Actions</th>
         </tr>
@@ -31,6 +31,9 @@ $bedrooms = getAllBedrooms();
                         <td> 
                             <p class="fw-bold mb-1"> ' . $bedroom["bedroom_name"] . '</p>
                         </td>
+                        <td> 
+                            <p class="fw-bold mb-1"> ' . $bedroom["roomcategory_name"] . '</p>
+                        </td>
                         <td>
                             <p class="fw-bold mb-1">' . $bedroom["bedroom_description"] . '</p>
                         </td>
@@ -38,17 +41,17 @@ $bedrooms = getAllBedrooms();
                             <p class="fw-bold mb-1">' . $bedroom["bedroom_bed"] . '</p>
                         </td>
                         <td>
-                            <p class="fst-italic mb-1">' . $bedroom["bedroom_people"] . '</p>
-                        </td>
-                        <td>
                             <p class="fst-italic mb-1">' . $bedroom["bedroom_priceday"] . ' € ' . '</p>
                         </td>
                         <td>
-                            <a href="admin_managebed.php?Id=' . $bedroom['bedroom_id'] . '" class="text-warning">
-                                <i class="fa-solid fa-wrench fa-xl"></i>
-                            </a>
-                            <a href="#" class="text-danger">
-                                <i class="fa-solid fa-xl fa-trash-can"></i>
+                            <a href="admin_managebed.php?IdEditBed=' . $bedroom['bedroom_id'] . '" class="text-warning">
+                                <i class="fa-solid fa-wrench fa-xl  mt-2"></i>
+                            </a></br>
+                            <a href="admin_managepicture.php?IdEditPic=' . $bedroom['bedroom_id'] . '" class="text-succes mt-5">
+                                <i class="fa-solid fa-image fa-xl  mt-3"></i>
+                            </a></br>
+                            <a href="#" class="text-danger text-end mt-3">
+                                <i class="fa-solid fa-xl fa-trash-can  mt-3"></i>
                             </a>
                         </td>
                     </tr>

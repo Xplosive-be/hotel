@@ -74,9 +74,16 @@ if( isset($_GET['error']) ) {
       header('refresh:3;url=index.php');
     break;
     case '106':
-      $msg_succes = "Admin --- Vos informations ont été modifiés avec succès.";
+      $msg_succes = "Admin --- Les informations ont été modifiés avec succès.";
       header('refresh:3;url=index.php');
     break;
+    case '107':
+      $msg_succes = "Admin --- La chambre a été modifié avec succès.";
+      header('refresh:3;url=admin_bedrooms.php');
+    break;
+    case '108':
+      $msg_succes = "Admin --- Chambre rajouté avec succès.";
+      header('refresh:3;url=admin_bedrooms.php');
     }
     echo '
     <section class="py-5 text-center container">

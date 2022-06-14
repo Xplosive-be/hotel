@@ -146,3 +146,33 @@
             // $msg_succes = "Vos informations ont été modifiés avec succès.";
             header('Location: ../message.php?success=106');
         }
+        if (isset( $_POST['btnEditBed'])) {
+            $name = htmlspecialchars($_POST['name']);
+            $description = $_POST['description'];
+            $typeBed = htmlspecialchars($_POST['typeBed']);
+            $category = htmlspecialchars($_POST['category']);
+            $price = htmlspecialchars($_POST['price']);
+
+            $sql = "UPDATE `bedroom` SET `bedroom_name` = '". $name . "', `bedroom_description` = '" . $description . "', `bedroom_bed` = '" . $typeBed . "', `id_roomcategory` = '" . $category . "', `bedroom_priceday` = '" . $price ."'  WHERE `bedroom`.`bedroom_id` = ". $_SESSION['idBedroomEdit'] . ";";
+
+            $db = connectionBD();
+            $db->exec( $sql );            
+            header('Location: ../message.php?success=107');
+        }
+        if (isset( $_POST['btnAddBed'])) {
+            $name = htmlspecialchars($_POST['name']);
+            $description = $_POST['description'];
+            $typeBed = htmlspecialchars($_POST['typeBed']);
+            $category = htmlspecialchars($_POST['category']);
+            $price = htmlspecialchars($_POST['price']);
+
+            $sql = "INSERT `bedroom` SET `bedroom_name` = '". $name . "', `bedroom_description` = '" . $description . "', `bedroom_bed` = '" . $typeBed . "', `id_roomcategory` = '" . $category . "', `bedroom_priceday` = '" . $price ."'";
+            echo $sql;
+            // $db = connectionBD();
+            // $db->exec( $sql );            
+            // header('Location: ../message.php?success=108');
+        }
+
+        if(isset($_POST['btnAddPic'])){
+            var_dump($_FILES);
+        }

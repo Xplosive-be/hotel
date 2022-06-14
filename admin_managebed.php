@@ -3,11 +3,9 @@ require_once("gabarit/header.php");
 require_once("gabarit/menu.php");
 require_once("lib/php/fonctions.php");
 Admin();
-$_SESSION['idBedroomEdit']= htmlspecialchars($_GET['Id']);
-$beedroom = getBedroomFromId($_SESSION['idBedroomEdit']);
+$_SESSION['idBedroomEdit'] = htmlspecialchars($_GET['IdEditBed']);
+$bedroom = getBedroomFromId($_SESSION['idBedroomEdit']);
 $images = getImagesBedroom($_SESSION['idBedroomEdit']);
-var_dump($beedroom);
-var_dump($images);
 ?>
 
 <div class="container my-5">
@@ -15,62 +13,51 @@ var_dump($images);
         <div class="text-start body-signin ">
             <main class="form-signin" style="max-width: 80%;">
                 <form action="models/process.php" method="post">
-                    <h1 class="h3 mb-5 fw-normal text-center text-danger fw-bolder">Admin - Modification du profil</h1>
+                    <h1 class="h3 mb-5 fw-normal text-center text-danger fw-bolder">Admin - Modification du chambre</h1>
                     <div class="row g-3">
                         <div class="col-sm-6">
-                            <label for="surName" class="form-label">Prénom</label>
-                            <input type="text" class="form-control" id="surName" value="<?php echo $profil['acc_surname'] ?>" name="surname" required>
+                            <label for="name" class="form-label">Nom de la chambre</label>
+                            <input type="text" class="form-control" id="name" value="<?php echo $bedroom['bedroom_name'] ?>" name="name" required>
                         </div>
-                        <div class="col-sm-6">
-                            <label for="Name" class="form-label">Nom</label>
-                            <input type="text" class="form-control" id="Name" value="<?php echo $profil['acc_name'] ?>" name="name" required>
+                        <div class="mb-3 col-12">
+                            <label for="description" class="form-label">Description (code en html)</label>
+                            <textarea class="form-control" id="description" rows="12" name="description">
+                            <?php echo $bedroom['bedroom_description'] ?>
+                            </textarea>
                         </div>
-
-                        <!-- Email -->
-                        <div class="col-12">
-                            <label for="email" class="form-label">Adresse e-mail</label>
-                            <input type="email" class="form-control" id="email" name="email" disabled value="<?php echo $profil['acc_email'] ?>">
+                        <div class="col-sm-3 mb-1">
+                            <label for="typeBed">Type de lit : </label></br>
+                            <select name="typeBed">
+                                <option value="double">Double <?php (($bedroom['bedroom_bed'] == 'double') ?  'selected' : 'selected') ?></option>
+                                <option value="twin">Jumelle <?php (($bedroom['bedroom_bed'] == 'twin') ?  'selected' : 'selected') ?></option>
+                                <option value="single">Simple <?php (($bedroom['bedroom_bed'] == 'single') ?  'selected' : 'selected') ?></option>
+                            </select>
                         </div>
-                        <div class="col-12">
-                            <label for="address" class="form-label">Adresse</label>
-                            <input type="text" class="form-control" id="address" name="address" value="<?php echo $profil['acc_address'] ?>" required>
-                        </div>
-                        <div class="col-12">
-                            <label for="country" class="form-label">Pays</label>
-                            <select class="form-select" id="country" name="country" required>
+                        <div class="col-sm mb-1">
+                            <label for="category" class="form-label">Catégorie</label>
+                            <select class="form-select" id="category" name="category" required>
                                 <?php
-                                $results = getCountryList();
-                                foreach ($results as $country) {
-                                    echo '<option value="' . $country['country_id'] . '"' . (($country['country_id'] == $profil['acc_id_country']) ? ' selected' : '') . '>' . $country['country_fr'] . '</option>';
+                                $categoryBed = getCategoryBedList();
+                                foreach ($categoryBed as $category) {
+                                    var_dump($category);
+                                    echo '<option value="' . $category['roomcategory_id'] . '"' . (($category['roomcategory_name'] == $bedroom['roomcategory_name']) ? 'selected'  : '') . '>' . $category['roomcategory_name'] . '</option>';
                                 }
                                 ?>
                             </select>
-                            <div class="col-12">
-                                <label for="city" class="form-label">Ville</label>
-                                <input type="text" class="form-control" id="city" value="<?php echo $profil['acc_city'] ?>" name="city" required>
-                            </div>
-                            <div class="d-flex d-flex justify-content-center justify-content-around mt-5">
-                                <div class="form-check ">
-                                    <input class="form-check-input" type="checkbox" value="1" name="admin" <?php echo ($profil['acc_admin'] == 1) ? 'checked' : '' ?>>
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                    <p>Administrateur</p>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" name="active" <?php echo ($profil['acc_active'] == 1) ? 'checked' : '' ?>>
-                                    <label class="form-check-label" for="flexCheckChecked">
-                                        <p>Active</p>
-                                    </label>
-                                </div>
-                            </div>
-                            <!-- Bouton de Modification-->
-                        </div class="text-center"><button class=" mt-3 btn btn-danger mx-auto mb-4 fw-bolder text-center" type=submit" name="btnEditAdmin">Modifier</button></div>
-                </form>
-            </main>
+                        </div>
+                        <div class="col-sm mb-1">
+                            <label for="price" class="form-label">Prix en €</label>
+                            <input type="text" name="price" class="form-control" id="price" value="<?php echo $bedroom['bedroom_priceday'] ?>" name="price" required>
+                        </div>
+                    </div>
+                    <!-- Bouton de Modification-->
+        </div class="text-center"><button class=" mt-3 btn btn-danger mx-auto mb-4 fw-bolder text-center" type=submit" name="btnEditBed">Modifier</button>
+        </form>
+        </main>
 
 
-        </div>
+    </div>
 
 
 
-<?php require_once("gabarit/footer.php"); ?>
+    <?php require_once("gabarit/footer.php"); ?>

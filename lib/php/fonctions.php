@@ -24,6 +24,16 @@ function getCountryList(){
     $stmt->closeCursor();
     return $results;
 }
+function getCategoryBedList(){
+    $bdd = connectionBD();
+    $stmt = $bdd->prepare('
+    SELECT * 
+    FROM category_bedroom');
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $results;
+}
 
 function getAccountCodeActivation($idAccount) {
     $bdd = connectionBD();
@@ -79,8 +89,8 @@ function getProfils(){
 function getAllBedrooms () {
     $bdd = connectionBD();
     $stmt = $bdd->prepare('
-    SELECT * 
-    FROM bedroom ');
+    SELECT bedroom_id,bedroom_name,bedroom_description,bedroom_bed,bedroom_priceday, category_bedroom.roomcategory_name FROM bedroom
+    INNER JOIN category_bedroom ON  bedroom.id_roomcategory = category_bedroom.roomcategory_id');
     $stmt->execute();
     $bedrooms = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
@@ -89,12 +99,12 @@ function getAllBedrooms () {
 function getBedroomFromId ($idBedroom) {
     $bdd = connectionBD();
     $stmt = $bdd->prepare('
-    SELECT bedroom_id,bedroom_name,bedroom_description,bedroom_bed,bedroom_people,bedroom_priceday, category_bedroom.roomcategory_name FROM bedroom
+    SELECT bedroom_id,bedroom_name,bedroom_description,bedroom_bed,bedroom_priceday, category_bedroom.roomcategory_name FROM bedroom
     INNER JOIN category_bedroom ON  bedroom.id_roomcategory = category_bedroom.roomcategory_id
     WHERE bedroom_id = :idBedroom');
     $stmt->bindValue(":idBedroom",$idBedroom);
     $stmt->execute();
-    $bedroom = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $bedroom = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $bedroom;
 }

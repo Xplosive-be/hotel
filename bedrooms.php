@@ -16,15 +16,29 @@ $bedrooms = getAllBedrooms();
             </div>
             <div id="carouselExampleSlidesOnly" class="carousel slide col-6" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner ">
-                    <?php foreach ($bedrooms as $key => $bedroomImages) {
-                        $images = getImagesBedroom($bedroom['bedroom_id']);
+                    <?php
+                    $images = getImagesBedroom($bedroom['bedroom_id']);
+                    // var_dump($images);
+                    if(!empty($images)){
+                    foreach ($bedrooms as $key => $bedroomImages) {
                         $bedroomsImages[$key]['image'] = $images;
                         // Si la Key est 0 alors on mets active pour le carrousel sinon 
                         $active = ($key == 0) ? 'active' : '';
                         echo '<div class="carousel-item ' . $active . '">';
                         echo '
-                        <img src="' . $bedroomsImages[$key]["image"][$key]["picture_url"] . '" class="d-block w-100 active " alt="' . $bedroomsImages[$key]["image"][$key]["picture_description"].'">
-                        </div>';}
+                        <img src="' . $bedroomsImages[$key]["image"][$key]["picture_url"] . '" class="d-block w-100 active " alt="' . $bedroomsImages[$key]["image"][$key]["picture_description"] . '">
+                        </div>';
+                    }
+                    } else {
+                        echo '<div class="carousel-item active">
+                            <img src="ressources/images/chambres/default.png" alt="Bientôt disponible">
+                            </div>
+                        ';
+                        echo '<div class="carousel-item ">
+                            <img src="ressources/images/chambres/default.png" alt="Bientôt disponible">
+                            </div>
+                        ';
+                    }
                     ?>
                 </div>
                 <h4>Prix: <span class="text-danger"><?= $bedroom['bedroom_priceday'] ?> </span> € /nuit.</h4>

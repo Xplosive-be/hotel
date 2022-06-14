@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 07 juin 2022 à 08:47
+-- Généré le : lun. 13 juin 2022 à 19:47
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -40,11 +40,11 @@ CREATE TABLE IF NOT EXISTS `account` (
   `acc_email` varchar(30) NOT NULL,
   `acc_password` varchar(128) NOT NULL,
   `acc_code_activation` varchar(32) NOT NULL,
-  `acc_admin` tinyint(4) NOT NULL,
+  `acc_admin` tinyint(1) NOT NULL,
   `acc_active` tinyint(1) NOT NULL,
   PRIMARY KEY (`acc_id`),
   KEY `FK_Pays` (`acc_id_country`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -58,7 +58,6 @@ CREATE TABLE IF NOT EXISTS `bedroom` (
   `bedroom_name` varchar(30) NOT NULL,
   `bedroom_description` text NOT NULL,
   `bedroom_bed` enum('double','twin','single') NOT NULL,
-  `bedroom_people` int(11) NOT NULL,
   `bedroom_priceday` int(11) NOT NULL,
   `id_roomcategory` int(11) NOT NULL,
   PRIMARY KEY (`bedroom_id`),
@@ -69,11 +68,11 @@ CREATE TABLE IF NOT EXISTS `bedroom` (
 -- Déchargement des données de la table `bedroom`
 --
 
-INSERT INTO `bedroom` (`bedroom_id`, `bedroom_name`, `bedroom_description`, `bedroom_bed`, `bedroom_people`, `bedroom_priceday`, `id_roomcategory`) VALUES
-(1, 'Chambre Standard', 'Cette chambre dispose d’une télévision à écran plat de 107 cm et d’une salle de bains en marbre avec douche et baignoire séparée. </br> \nCafé et thé équipements. </br>\nSuperficie 20 m² </br>\n\nDans votre salle de bains privative : </br>\n  \n  <ul> \n    <li>Articles de toilette gratuits </li> \n    <li>Peignoir</li> <li>Toilettes</li> \n    <li>Baignoire ou douche</li> <li>Serviettes</li> \n    <li>Chaussons</li> \n    <li>Sèche-cheveux</li> \n    <li>Papier toilette</li>\n    <strong>Vue :</strong> \n    <li>Vue sur la ville</li> \n    <li>Vue sur une cour intérieure</li> \n </ul>\n', 'double', 2, 120, 1),
-(2, 'Chambre Supérieure', 'Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\n\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\nSuperficie 30 m² </br>\nDans votre salle de bains privative :</br>\n\n<ul> \n    <li>Articles de toilette gratuits </li> \n    <li>Peignoir</li> <li>Toilettes</li> \n    <li>Baignoire ou douche</li> <li>Serviettes</li> \n    <li>Chaussons</li> \n    <li>Sèche-cheveux</li> \n    <li>Papier toilette</li>\n    <strong>Vue :</strong> \n    <li>Vue sur la ville</li> \n    <li>Vue sur une cour intérieure</li> \n </ul>', 'twin', 3, 240, 2),
-(3, 'Suite Deluxe', 'Les Suites Delux sont conçues sur deux niveaux : La chambre, avec un lit à baldaquin en bois frappant accompagné d’une chaise longue de détente, et salle de bains sont situés à l’étage supérieur.</br> Superficie 90 m² </br> Machine à expresso et thé. Le salon avec salle d’eau séparée au niveau inférieur, et chacun a sa propre entrée privée.</br>  <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>', 'double', 2, 1000, 3),
-(4, 'Suite Présidentielle', 'Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>', 'twin', 4, 3000, 4);
+INSERT INTO `bedroom` (`bedroom_id`, `bedroom_name`, `bedroom_description`, `bedroom_bed`, `bedroom_priceday`, `id_roomcategory`) VALUES
+(1, 'Chambre Standard', '                            Cette chambre dispose d’une télévision à écran plat de 107 cm et d’une salle de bains en marbre avec douche et baignoire séparée. </br> Café et thé équipements. </br> Superficie 20 m² </br> Dans votre salle de bains privative : </br> <ul> <li>Articles de toilette gratuits </li> <li>Peignoir</li> <li>Toilettes</li> <li>Baignoire ou douche</li> <li>Serviettes</li> <li>Chaussons</li> <li>Sèche-cheveux</li> <li>Papier toilette</li> <strong>Vue :</strong> <li>Vue sur la ville</li> <li>Vue sur une cour intérieure</li> </ul>                                                                                                                                                                                                                                                                                                                     ', 'double', 120, 3),
+(2, 'Chambre Supérieure', 'Ces chambres spacieuses comprennent un coin salon, une connexion Wi-Fi haut débit gratuite et un téléphone haut-parleur.</br>\n\nLes luxueuses salles de bains en marbre disposent d’une baignoire et d’une douche séparées et d’articles de toilette. Machine à expresso et théière.</br>\nSuperficie 30 m² </br>\nDans votre salle de bains privative :</br>\n\n<ul> \n    <li>Articles de toilette gratuits </li> \n    <li>Peignoir</li> <li>Toilettes</li> \n    <li>Baignoire ou douche</li> <li>Serviettes</li> \n    <li>Chaussons</li> \n    <li>Sèche-cheveux</li> \n    <li>Papier toilette</li>\n    <strong>Vue :</strong> \n    <li>Vue sur la ville</li> \n    <li>Vue sur une cour intérieure</li> \n </ul>', 'twin', 240, 2),
+(3, 'Suite Deluxe', 'Les Suites Delux sont conçues sur deux niveaux : La chambre, avec un lit à baldaquin en bois frappant accompagné d’une chaise longue de détente, et salle de bains sont situés à l’étage supérieur.</br> Superficie 90 m² </br> Machine à expresso et thé. Le salon avec salle d’eau séparée au niveau inférieur, et chacun a sa propre entrée privée.</br>  <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>', 'double', 1000, 3),
+(4, 'Suite Présidentielle', 'Les 130-140m² de la suite présidentielle offrent des espaces de vie et de réunion séparés pouvant accueillir jusqu’à huit personnes ainsi qu’une petite cuisine.</br> D’une occupation de 3 personnes, une chambre supplémentaire est offerte gratuitement. Machine à expresso et thé.</br> Mais surtout d\'un Jaccuzi & hammam </br> Superficie 140 m² </br> <ul>      <li>Articles de toilette gratuits </li>      <li>Peignoir</li> <li>Toilettes</li>      <li>Baignoire ou douche</li> <li>Serviettes</li>      <li>Chaussons</li>      <li>Sèche-cheveux</li>      <li>Papier toilette</li>     <strong>Vue :</strong>      <li>Vue sur la ville</li>      <li>Vue sur une cour intérieure</li>   </ul>', 'twin', 3000, 4);
 
 -- --------------------------------------------------------
 

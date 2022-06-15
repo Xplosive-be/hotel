@@ -140,7 +140,7 @@
                 } else {
                     $active = htmlspecialchars($_POST['active']);
                 }
-
+            // Requête pour mettre à jour le profil dans la section Admin.
             $sql ="UPDATE `account` SET `acc_name` = '". $name . "', `acc_surname` = '" . $surname . "', `acc_address` = '" . $address . "', `acc_city` = '" . $city . "', `acc_id_country` = '" . $country ."' , `acc_admin` = '" . $admin ."' , `acc_active` = '" . $active ."'  WHERE `account`.`acc_id` = '". $_SESSION['idProfilEdit'] . "'";
             $db->exec( $sql );
             // $msg_succes = "Vos informations ont été modifiés avec succès.";
@@ -152,10 +152,10 @@
             $typeBed = htmlspecialchars($_POST['typeBed']);
             $category = htmlspecialchars($_POST['category']);
             $price = htmlspecialchars($_POST['price']);
-
-            $sql = "UPDATE `bedroom` SET `bedroom_name` = '". $name . "', `bedroom_description` = '" . $description . "', `bedroom_bed` = '" . $typeBed . "', `id_roomcategory` = '" . $category . "', `bedroom_priceday` = '" . $price ."'  WHERE `bedroom`.`bedroom_id` = ". $_SESSION['idBedroomEdit'] . ";";
-
+            // Mettre à jour la bedroom
             $db = connectionBD();
+            //   $msg_succes = "Admin --- La chambre a été modifié avec succès.";
+            $sql = "UPDATE `bedroom` SET `bedroom_name` = '". $name . "', `bedroom_description` = '" . $description . "', `bedroom_bed` = '" . $typeBed . "', `id_roomcategory` = '" . $category . "', `bedroom_priceday` = '" . $price ."'  WHERE `bedroom`.`bedroom_id` = ". $_SESSION['idBedroomEdit'] . ";";
             $db->exec( $sql );            
             header('Location: ../message.php?success=107');
         }
@@ -165,14 +165,43 @@
             $typeBed = htmlspecialchars($_POST['typeBed']);
             $category = htmlspecialchars($_POST['category']);
             $price = htmlspecialchars($_POST['price']);
-
+            // Requête pour rajouter la nouvelle chambre
             $sql = "INSERT `bedroom` SET `bedroom_name` = '". $name . "', `bedroom_description` = '" . $description . "', `bedroom_bed` = '" . $typeBed . "', `id_roomcategory` = '" . $category . "', `bedroom_priceday` = '" . $price ."'";
-            echo $sql;
-            // $db = connectionBD();
-            // $db->exec( $sql );            
-            // header('Location: ../message.php?success=108');
+            $db = connectionBD();
+            $db->exec( $sql ); 
+            // $msg_succes = "Admin --- Chambre rajouté avec succès.";           
+            header('Location: ../message.php?success=108');
         }
-
         if(isset($_POST['btnAddPic'])){
-            var_dump($_FILES);
+            if(isset($_FILES['image']) && $_FILES['image']['error'] ==0){  //l'image existe et a été stockée temporairement sur le serveur
+
+                if ($_FILES['image']['size']<= 3000000){ //l'image fait moins de 3MO
+            
+                    $informationsImage = pathinfo($_FILES['image']['name']);
+                    $extensionImage = $informationsImage['extension'];
+                    // Extensions qu'on autorise
+                    $extensionsArray = array('png', 'gif', 'jpg', 'jpeg','webp'); 
+                    
+                    // le type de l'image correspond à ce que l'on attend, on peut alors l'envoyer sur notre serveur
+                    if(in_array($extensionImage, $extensionsArray)){ //
+            
+                        move_uploaded_file($_FILES['image']['tmp_name'], '../ressources/images/chambres/uploads/'.time().basename($_FILES['image']['name'])); // on renomme notre image avec une clé unique suivie du nom du fichier
+                        // Rajouter la photo dans la table picture
+                        $db = connectionBD();
+                        $sql = "INSERT `picture` SET `picture_name` = '". $_FILES['image']['name'] . "', `picture_url` = 'ressources/images/chambres/uploads/" . time().basename($_FILES['image']['name']) . "', `picture_description` = '" . $_FILES['image']['name'] . "'";
+                        $db->exec( $sql ); 
+                        // requête pour récupérer la dernière valeur d'entrée du tableau de l'id picture
+                        $stmt = $db->prepare('
+                        SELECT `picture_id` FROM `picture` ORDER BY `picture`.`picture_id` DESC'
+                        );
+                        $stmt->execute();
+                        $idpicture = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                        // la requête pour lier la photo avec l'id de la chambre dans la gallery
+                        $sql = "INSERT `gallery` SET `id_picture` = '". $idpicture[0]['picture_id'] . "', `id_bedroom` = '". $_SESSION['idEditPic'] ."'";
+                        $db->exec( $sql );     
+                        //  $msg_succes = "Admin --- Photo rajouté avec succès.";
+                        header('Location: ../message.php?success=109');
+                    }
+                }
+            }
         }

@@ -84,7 +84,11 @@ if( isset($_GET['error']) ) {
     case '108':
       $msg_succes = "Admin --- Chambre rajouté avec succès.";
       header('refresh:3;url=admin_bedrooms.php');
+    case '109':
+      $msg_succes = "Admin --- Photo rajouté avec succès.";
+      header('refresh:3;url=admin_managepicture.php?IdEditPic=' . $_SESSION["idEditPic"].'');
     }
+
     echo '
     <section class="py-5 text-center container">
     <div class="row py-lg-5">

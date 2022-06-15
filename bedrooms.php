@@ -19,15 +19,15 @@ $bedrooms = getAllBedrooms();
                     <?php
                     $images = getImagesBedroom($bedroom['bedroom_id']);
                     // var_dump($images);
+                    $key = 0;
                     if(!empty($images)){
-                    foreach ($bedrooms as $key => $bedroomImages) {
-                        $bedroomsImages[$key]['image'] = $images;
-                        // Si la Key est 0 alors on mets active pour le carrousel sinon 
+                    foreach ($images as $key => $bedroomImages) {
                         $active = ($key == 0) ? 'active' : '';
                         echo '<div class="carousel-item ' . $active . '">';
-                        echo '
-                        <img src="' . $bedroomsImages[$key]["image"][$key]["picture_url"] . '" class="d-block w-100 active " alt="' . $bedroomsImages[$key]["image"][$key]["picture_description"] . '">
+                        // Si la Key est 0 alors on mets active pour le carrousel sinon 
+                        echo '<img src="' . $bedroomImages["picture_url"] . '" class="d-block w-100 active " alt="">
                         </div>';
+                        $key++;
                     }
                     } else {
                         echo '<div class="carousel-item active">

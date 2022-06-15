@@ -5,7 +5,6 @@ require_once("lib/php/fonctions.php");
 $profil = getProfil($_GET['Id']);
 $_SESSION['idProfilEdit']= $_GET['Id'];
 ?>
-
 <div class="container my-5">
     <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
         <div class="text-start body-signin ">

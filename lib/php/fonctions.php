@@ -123,7 +123,6 @@ function getImagesBedroom($idBedroom){
     $stmt->closeCursor();
     return $images;
 }
-
 function getCategoryBedroom(){
     $bdd = connectionBD();
     $stmt = $bdd->prepare('

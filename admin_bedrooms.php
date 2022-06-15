@@ -3,6 +3,7 @@ require_once("gabarit/header.php");
 require_once("gabarit/menu.php");
 require_once("lib/php/fonctions.php");
 Admin();
+// Récupere toutes les chambres qui se trouble dans la table Bedroom
 $bedrooms = getAllBedrooms();
 ?>
 
@@ -22,6 +23,7 @@ $bedrooms = getAllBedrooms();
         </tr>
     </thead>
     <tbody>
+        <!-- Boucle pour faire apparaitre les chambres sur la page chambres  -->
     <?php foreach ($bedrooms as $key => $bedroom){
                 echo '
                     <tr>

@@ -3,7 +3,7 @@ require_once("gabarit/header.php");
 require_once("gabarit/menu.php");
 require_once("lib/php/fonctions.php");
 ?>
-
+<!-- Présentation avec images -->
 <div class="container col-xxl-8 px-4 py-5">
   <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
     <div class="col-10 col-sm-8 col-lg-6">
@@ -19,6 +19,7 @@ require_once("lib/php/fonctions.php");
     </div>
   </div>
 </div>
+<!-- Présentation de nos équipes -->
 <div class="container py-5"> 
     <div class="row mb-4">
       <div class="col-lg-5">
@@ -49,6 +50,7 @@ require_once("lib/php/fonctions.php");
       </div>
     </div>
   </div>
+  <!-- 3 éme section -->
 <div class="container px-4 py-5" id="hanging-icons">
     <h2 class="pb-2 border-bottom">Hanging icons</h2>
     <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">

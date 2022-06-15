@@ -15,6 +15,7 @@ require_once("lib/php/fonctions.php");
                     <div class="col-md-6 mt-2">
                         <div class="md-form mb-0">
                             <label for="name" class="">Votre nom</label>
+                            <!-- Préremplisage de l'input avec name -->
                             <?php  $name = (isset($_SESSION['name'])) ? $_SESSION['name'] : '';?>
                             <input type="text" id="name" name="name" value="<?= $name ?>" class="form-control">
                         </div>
@@ -22,6 +23,7 @@ require_once("lib/php/fonctions.php");
                     <div class="col-md-6 mt-2">
                         <div class="md-form mb-0 ">
                             <label for="email" class="">Votre adresse mail</label>
+                            <!-- Préremplisage de l'input avec email -->
                             <?php  $email = (isset($_SESSION['email'])) ? $_SESSION['email'] : '';?>
                             <input type="text" id="email" name="email" value="<?= $email ?>" class="form-control">
                         </div>

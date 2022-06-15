@@ -20,6 +20,7 @@ $profils = getProfils();
         </tr>
     </thead>
     <tbody>
+        <!-- Affichage dans le tableau de tout les utilisateurs -->
     <?php foreach ($profils as $key => $profil){
                 echo '
                     <tr>

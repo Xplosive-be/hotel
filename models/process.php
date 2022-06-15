@@ -2,7 +2,6 @@
     require_once("../lib/php/fonctions.php");
     require_once("../lib/php/pdo.php");
     session_start();
-    
     if( isset( $_POST['btnRegistration'])){
             $surname = htmlspecialchars($_POST['surname']);
             $name = htmlspecialchars($_POST['name']);
@@ -174,14 +173,11 @@
         }
         if(isset($_POST['btnAddPic'])){
             if(isset($_FILES['image']) && $_FILES['image']['error'] ==0){  //l'image existe et a été stockée temporairement sur le serveur
-
                 if ($_FILES['image']['size']<= 3000000){ //l'image fait moins de 3MO
-            
                     $informationsImage = pathinfo($_FILES['image']['name']);
                     $extensionImage = $informationsImage['extension'];
                     // Extensions qu'on autorise
                     $extensionsArray = array('png', 'gif', 'jpg', 'jpeg','webp'); 
-                    
                     // le type de l'image correspond à ce que l'on attend, on peut alors l'envoyer sur notre serveur
                     if(in_array($extensionImage, $extensionsArray)){ //
             

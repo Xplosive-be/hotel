@@ -17,11 +17,14 @@ $bedrooms = getAllBedrooms();
             <div id="carouselExampleSlidesOnly" class="carousel slide col-6" data-bs-ride="carousel" data-bs-interval="3000">
                 <div class="carousel-inner ">
                     <?php
+                    // Récupére les images via l'id BedRoom
                     $images = getImagesBedroom($bedroom['bedroom_id']);
-                    // var_dump($images);
-                    $key = 0;
+                    // Initialisation de la key 0
+                    $keys = 0;
+                    // Si le 
                     if(!empty($images)){
                     foreach ($images as $key => $bedroomImages) {
+                        // Si la key est 0 à zéro  alors on mets la balise active pour démarer la première image du caroussel
                         $active = ($key == 0) ? 'active' : '';
                         echo '<div class="carousel-item ' . $active . '">';
                         // Si la Key est 0 alors on mets active pour le carrousel sinon 

@@ -4,6 +4,7 @@ require_once("gabarit/menu.php");
 // Init message d'erreur 
 $msg_error = "";
 
+// Message d'erreur
 if( isset($_GET['error']) ) {
     switch( $_GET['error'] )
     {
@@ -47,7 +48,7 @@ if( isset($_GET['error']) ) {
       </div>
     </div>
   </section>';
-
+// Message de succès
   } elseif (isset($_GET['success'])) {
 
     switch( $_GET['success'] )

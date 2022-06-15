@@ -33,6 +33,7 @@ Admin();
                             <label for="category" class="form-label">Catégorie</label>
                             <select class="form-select" id="category" name="category" required>
                                 <?php
+                                // Récuperer les différents catégorie de la bedlist
                                 $categoryBed = getCategoryBedList();
                                 foreach ($categoryBed as $category) {
                                     echo '<option value="' . $category['roomcategory_id'] . '"' . (($category['roomcategory_name'] == $bedroom['roomcategory_name']) ? 'selected'  : '') . '>' . $category['roomcategory_name'] . '</option>';

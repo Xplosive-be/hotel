@@ -11,6 +11,7 @@
             </ul>
 
             <?php 
+            // Affichage bouton admin si le profil est administrateur
             if(isset($_SESSION['admin']) && $_SESSION['admin'] == 1){
                 echo '
                 <div class="col-md-3 text-end text-nowrap">
@@ -18,6 +19,7 @@
                  <a href="admin.php"><button type="button" class="btn btn-primary text-white"><i class="fa-solid fa-screwdriver-wrench"></i> Admin</button></a>
                  <a href="deconnection.php"><button type="button" class="btn btn-outline-danger me-2"><i class="fa-solid fa-xmark"></i> Déconnexion</button></a> 
                 </div>';
+                // Affichage bouton profil
              } elseif(isset($_SESSION['admin'])){
                 echo '
                 <div class="col-md-3 text-end">
@@ -25,6 +27,7 @@
                     <a href="deconnection.php"><button type="button" class="btn btn-outline-danger me-2">Déconnexion</button></a> 
                 </div>';
             }  else {
+                // Nouveaux sur le site Bouton de connection + inscription
                 echo '
                 <div class="col-md-3 text-end">
                 <a href="connection.php"><button type="button" class="btn btn-outline-danger me-2">Connexion</button></a>

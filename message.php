@@ -34,6 +34,9 @@ if( isset($_GET['error']) ) {
     case '707':
       $msg_error ="Votre compte n'est pas activé, veuillez vérifier  votre boîte mail!";
       header('refresh:3;url=index.php');
+    case '708':
+      $msg_error ="Admin: Erreur avec les id photos ou chambres,ressayez";
+      header('refresh:3;url=admin_bedrooms.php');
     }
 
     echo '
@@ -84,9 +87,23 @@ if( isset($_GET['error']) ) {
     case '108':
       $msg_succes = "Admin --- Chambre rajouté avec succès.";
       header('refresh:3;url=admin_bedrooms.php');
+    break;
     case '109':
-      $msg_succes = "Admin --- Photo rajouté avec succès.";
+      $msg_succes = "Admin --- La photo a été rajoutée avec succès.";
       header('refresh:3;url=admin_managepicture.php?IdEditPic=' . $_SESSION["idEditPic"].'');
+    break;
+    case '110':
+      $msg_succes = "Admin --- La photo a été supprimée avec succès.";
+      header('refresh:3;url=admin_managepicture.php?IdEditPic=' . $_SESSION["idEditPic"].'');
+    break;
+    case '111':
+      $msg_succes = "Admin --- L'utilisateur a été suprimée.";
+      header('refresh:3;url=admin_managepicture.php?IdEditPic=' . $_SESSION["idEditPic"].'');
+    break;
+    case '112':
+      $msg_succes = "Admin --- La chambre a été suprimée.";
+      header('refresh:3;url=admin_bedrooms.php');
+    break;
     }
 
     echo '

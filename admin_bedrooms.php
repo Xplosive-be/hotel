@@ -50,7 +50,7 @@ $bedrooms = getAllBedrooms();
                             <a href="admin_managepicture.php?IdEditPic=' . $bedroom['bedroom_id'] . '" class="text-succes mt-5">
                                 <i class="fa-solid fa-image fa-xl  mt-3"></i>
                             </a></br>
-                            <a href="#" class="text-danger text-end mt-3">
+                            <a href="models/delete.php?idDelBedRoom=' . $bedroom['bedroom_id'] . '" class="text-danger text-end mt-3">
                                 <i class="fa-solid fa-xl fa-trash-can  mt-3"></i>
                             </a>
                         </td>

@@ -15,10 +15,10 @@ $imagesBedroom = getImagesBedroom($_GET['IdEditPic']);
     foreach ($imagesBedroom as $key => $image) {
         echo ' 
                 <p class="text-center"> ID Picture : ' . $image["picture_id"] . '</p>
-                <a href="#" class="text-danger text-center  mb-3 mt-1"><i class="fa-solid fa-xl fa-trash-can  mt-3"></i></a>
+                <a href="models/delete.php?delIdPicture=' . $image["picture_id"] .'" class="text-danger text-center  mb-3 mt-1"><i class="fa-solid fa-xl fa-trash-can mt-3"></i></a>
                 <img src="' . $image["picture_url"] . '" alt="' . $image["picture_description"] . '" class="w-25 text-center mb-2 mb-md-4 shadow-1-strong rounded" >
                 <hr>
-                    ';
+            ';
     }
     ?>
     <div class="row w-50 " id="addPic">

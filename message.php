@@ -102,7 +102,7 @@ if( isset($_GET['error']) ) {
     break;
     case '111':
       $msg_succes = "Admin --- L'utilisateur a été suprimée.";
-      header('refresh:3;url=admin_managepicture.php?IdEditPic=' . $_SESSION["idEditPic"].'');
+      header('refresh:3;url=admin_users.php');
     break;
     case '112':
       $msg_succes = "Admin --- La chambre a été suprimée.";

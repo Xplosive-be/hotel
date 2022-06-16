@@ -46,7 +46,7 @@ $bedrooms = getAllBedrooms();
                             <p class="fst-italic mb-1">' . $bedroom["bedroom_priceday"] . ' € ' . '</p>
                         </td>
                         <td>
-                            <a href="admin_managebed.php?IdEditBed=' . $bedroom['bedroom_id'] . '" class="text-warning">
+                            <a href="admin_managebed.php?IdEditBed=' . $bedroom['bedroom_id'] . '" class="mb-3 text-warning">
                                 <i class="fa-solid fa-wrench fa-xl  mt-2"></i>
                             </a></br>
                             <a href="admin_managepicture.php?IdEditPic=' . $bedroom['bedroom_id'] . '" class="text-succes mt-5">

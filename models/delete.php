@@ -3,7 +3,7 @@
     require_once("../lib/php/pdo.php");
     session_start();
     Admin();
-    if(isset($_GET['delIdPicture']) && isset($_SESSION['idEditPic'])){
+    if(isset($_GET['delIdPicture'])){
         $db = connectionBD();
         // Récupérer l'url de l'image pour la supprimé 
         $stmt = $db->prepare('
@@ -38,7 +38,7 @@
         // $msg_succes = "Admin --- La chambre a été suprimée.";
         header('Location: ../message.php?success=112');
     } else {
-        // $msg_error ="Admin: Erreur avec les id photos ou chambres,ressayez";
-        header('Location: ../message.php?error=708');
+        //$msg_error ="Admin: Erreur imprévu";
+        header('Location: ../message.php?error=709');
     }
 ?> 

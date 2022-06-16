@@ -1,5 +1,6 @@
 <?php
 require_once("gabarit/header.php");
+require_once("lib/config/config.php");
 ?>
 <div class="text-center body-signin ">
 
@@ -9,7 +10,7 @@ require_once("gabarit/header.php");
     <h1 class="h3 mb-3 fw-normal">Bienvenu(e)</h1>
 
     <div class="form-floating">
-      <input type="email" class="form-control" id="floatingInput" name="login"placeholder="contact@belle-nuit.be" required>
+      <input type="email" class="form-control" id="floatingInput" name="login"placeholder="<?= $HOTEL_EMAIL ?>" required>
       <label for="floatingInput">Adresse mail</label>
     </div>
     <div class="form-floating">

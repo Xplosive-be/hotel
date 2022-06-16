@@ -38,6 +38,9 @@ if( isset($_GET['error']) ) {
     case '708':
       $msg_error ="Admin: Erreur avec les id photos ou chambres,ressayez";
       header('refresh:3;url=admin_bedrooms.php');
+    case '709':
+      $msg_error ="Admin: Erreur imprévu";
+      header('refresh:3;url=admin.php');
     }
 
     echo '

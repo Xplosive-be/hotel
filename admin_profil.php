@@ -24,7 +24,7 @@ $_SESSION['idProfilEdit']= $_GET['Id'];
                         <!-- Email -->
                         <div class="col-12">
                             <label for="email" class="form-label">Adresse e-mail</label>
-                            <input type="email" class="form-control" id="email" name="email" disabled value="<?php echo $profil['acc_email'] ?>">
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo $profil['acc_email'] ?>">
                         </div>
                         <div class="col-12">
                             <label for="address" class="form-label">Adresse</label>

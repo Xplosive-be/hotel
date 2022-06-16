@@ -31,7 +31,7 @@ $connexion = connectionBD();
                         <!-- Email -->
                         <div class="col-12">
                             <label for="email" class="form-label">Adresse e-mail <span class="text-muted"> (Obligatoire)</span></label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="contact@belle-nuit.be">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="<?= $HOTEL_EMAIL ?>">
                         </div>
                         <!-- mot de passe -->
                         <div class="col-12">

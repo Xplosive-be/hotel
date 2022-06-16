@@ -44,7 +44,7 @@ $profils = getProfils();
                         <a href="admin_profil.php?Id=' . $profil['acc_id'] . '" class="text-warning">
                             <i class="fa-solid fa-wrench fa-xl"></i>
                         </a>
-                        <a href="models/delete.php?idDelUser='. $profil["acc_id"] .'" class="text-danger">
+                        <a href="models/delete.php?idDelUser='. $profil["acc_id"] .'" class=" ms-3 text-danger">
                             <i class="fa-solid fa-xl fa-trash-can"></i>
                         </a>
                     </td>

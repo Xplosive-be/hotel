@@ -1,6 +1,7 @@
 <?php 
     require_once("../lib/php/fonctions.php");
     require_once("../lib/php/pdo.php");
+    require_once("../lib/config/config.php");
     session_start();
     if( isset( $_POST['btnRegistration'])){
             $surname = htmlspecialchars($_POST['surname']);
@@ -33,14 +34,13 @@
                     header('Location: ../message.php?error=705');
                     exit();
                 }
-            
             //  Création de la requête sql
             // `account`(`acc_id`, `acc_name`, `acc_surname`, `acc_address`, `acc_city`, `acc_id_country`, `acc_email`, `acc_password`, `acc_code_activation`, `acc_admin`, `acc_active`)
-                $sql = "INSERT INTO account VALUES (null,'$name','$surname','$address','$city', '$country','$email','$password', '$codeactivation', 0,0)";
-                $db->exec( $sql );
-                // $msg_succes = "Votre compte a été crée.";
-                header('Location: ../message.php?success=101');
-                exit();
+            $sql = 'INSERT `account` SET `acc_name` = "'. $name . '", `acc_surname` = "' . $surname . '", `acc_address` = "' . $address . '", `acc_city` = "' . $city . '", `acc_id_country` = "' . $country . '", `acc_email` = "' . $email . '", `acc_password` = "' . $password . '", `acc_code_activation` = "' . $codeactivation .'"';
+            $db->exec( $sql ); 
+            // $msg_succes = "Votre compte a été crée.";
+            header('Location: ../message.php?success=101');
+            exit();
         }
     }
         // PARTIE 
@@ -96,7 +96,7 @@
             $city = htmlspecialchars($_POST['city']);
             //SQL pour mettre à jour la DB
             $db = connectionBD();
-            $sql ="UPDATE `account` SET `acc_name` = '". $name . "', `acc_surname` = '" . $surname . "', `acc_address` = '" . $address . "', `acc_city` = '" . $city . "', `acc_id_country` = '" . $country ."' WHERE `account`.`acc_id` = '". $_SESSION["idAccount"] . "'";
+            $sql ='UPDATE `account` SET `acc_name` = "'. $name . '", `acc_surname` = "' . $surname . '", `acc_address` = "' . $address . '", `acc_city` = "' . $city . '", `acc_id_country` = "' . $country . '" WHERE `account`.`acc_id` = "'. $_SESSION["idAccount"] . '"';
             $db->exec( $sql );
             //Update Session avec les nouvelles valeurs.
             $_SESSION['surname'] = $surname;
@@ -114,7 +114,7 @@
             $message = htmlspecialchars($_POST['message']);
             $subject = htmlspecialchars($_POST['subject']);
             $content="De la part : $name \n Email: $email \n Message: $message";
-            $recipient = "contact@belle-nuit.be";
+            $recipient = $HOTEL_EMAIL;
             $mailheader = "de: $email \r\n";
             // mail($recipient, $subject, $content, $mailheader) or die("Erreur!");
             // $msg_succes = "Votre message a été envoyé, nous y répondrons dans un délais de 24 h ouvrables.";
@@ -140,7 +140,7 @@
                     $active = htmlspecialchars($_POST['active']);
                 }
             // Requête pour mettre à jour le profil dans la section Admin.
-            $sql ="UPDATE `account` SET `acc_name` = '". $name . "', `acc_surname` = '" . $surname . "', `acc_address` = '" . $address . "', `acc_city` = '" . $city . "', `acc_id_country` = '" . $country ."' , `acc_admin` = '" . $admin ."' , `acc_active` = '" . $active ."'  WHERE `account`.`acc_id` = '". $_SESSION['idProfilEdit'] . "'";
+            $sql ='UPDATE `account` SET `acc_name` = "'. $name . '", `acc_surname` = "' . $surname . '", `acc_address` = "' . $address . '", `acc_city` = "' . $city . '", `acc_id_country` = "' . $country . '" , `acc_admin` = "' . $admin . '" , `acc_active` = "' . $active .'"  WHERE `account`.`acc_id` = "'. $_SESSION['idProfilEdit'] . '"';
             $db->exec( $sql );
             // $msg_succes = "Vos informations ont été modifiés avec succès.";
             header('Location: ../message.php?success=106');
@@ -165,12 +165,13 @@
             $category = htmlspecialchars($_POST['category']);
             $price = htmlspecialchars($_POST['price']);
             // Requête pour rajouter la nouvelle chambre
-            $sql = "INSERT `bedroom` SET `bedroom_name` = '". $name . "', `bedroom_description` = '" . $description . "', `bedroom_bed` = '" . $typeBed . "', `id_roomcategory` = '" . $category . "', `bedroom_priceday` = '" . $price ."'";
             $db = connectionBD();
+            $sql = "INSERT `bedroom` SET `bedroom_name` = '". $name . "', `bedroom_description` = '" . $description . "', `bedroom_bed` = '" . $typeBed . "', `id_roomcategory` = '" . $category . "', `bedroom_priceday` = '" . $price ."'";
             $db->exec( $sql ); 
             // $msg_succes = "Admin --- Chambre rajouté avec succès.";           
             header('Location: ../message.php?success=108');
         }
+
         if(isset($_POST['btnAddPic'])){
             if(isset($_FILES['image']) && $_FILES['image']['error'] ==0){  //l'image existe et a été stockée temporairement sur le serveur
                 if ($_FILES['image']['size']<= 3000000){ //l'image fait moins de 3MO

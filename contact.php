@@ -2,6 +2,7 @@
 require_once("gabarit/header.php");
 require_once("gabarit/menu.php");
 require_once("lib/php/fonctions.php");
+require_once("lib/config/config.php");
 ?>
 <script src="ressources/js/contact.js"></script>
 <section class="container bg-light p-5 border rounded mb-5">
@@ -62,15 +63,15 @@ require_once("lib/php/fonctions.php");
         <div class="col-md-3 text-center mt-5">
             <ul class="list-unstyled mb-0 ">
                 <li><i class="fas fa-map-marker-alt fa-2x"></i>
-                    <p>Rue du Comte Ours Blanc 1, 6940 Durbuy</p>
+                    <p><?= $HOTEL_ADRESSE ?></p>
                 </li>
 
                 <li><i class="fas fa-phone mt-4 fa-2x"></i>
-                    <p>+32 496 15 62 15</p>
+                    <p><?= $HOTEL_TEL ?></p>
                 </li>
 
                 <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-                    <p>contact@belle-nuit.be</p>
+                    <p><?= $HOTEL_EMAIL ?></p>
                 </li>
             </ul>
         </div>

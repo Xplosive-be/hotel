@@ -4,7 +4,6 @@ require_once("gabarit/menu.php");
 require_once("lib/php/fonctions.php");
 Admin();
 $_SESSION['idEditPic'] = $_GET['IdEditPic'];
-$bedroom = getBedroomFromId($_GET['IdEditPic']);
 $imagesBedroom = getImagesBedroom($_GET['IdEditPic']);
 ?>
 <h1 class='text-center my-3 text-danger fw-bolder mb-5'>Gestionnaire des images pour la chambre </h1>

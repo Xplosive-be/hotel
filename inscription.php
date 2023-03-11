@@ -54,9 +54,8 @@ $connexion = connectionBD();
                             <select class="form-select" id="country" name="country" required>
                                 <?php
                                     // récupére la liste des pays
-                                    $results = getCountryList();
                                     // Donne la possibilité d'avoir
-                                    foreach($results as $country)		
+                                    foreach($countrys as $country)
                                     {
                                         echo '<option value="'.$country['country_id'].'"'.(($country['country_fr']==$COUNTRY)?' selected':'').'>'.$country['country_fr'].'</option>';
                                     }

@@ -9,7 +9,7 @@ $profil = getProfil($_SESSION['idAccount']);
     <div class="row p-4 pb-0 pe-lg-0 pt-lg-5 align-items-center rounded-3 border shadow-lg">
         <div class="text-start body-signin ">
             <main class="form-signin" style="max-width: 80%;">
-                <form action="models/process.php" method="post">
+                <form action="" method="post">
                     <h1 class="h3 mb-5 fw-normal text-center text-danger fw-bolder">Modification du profil</h1>
                     <div class="row g-3">
                         <!-- Prénom -->

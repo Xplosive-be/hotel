@@ -25,7 +25,7 @@ if(isset($_GET['id']) && isset($_GET['codeActivation'])){
       // redirection vers le $msg_succes = "Votre compte a été activé.";
       header('Location: message.php?success=100');
       // Si Le compte est déjà validé
-    } elseif ($getActive  == '1' ) {
+    } elseif ($InfoActivation['acc_active'] == '1') {
       // redirection vers le $msg_error = "Vous avez déjà validé, votre compte."
       header('Location: message.php?error=702');
     } else {
